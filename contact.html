@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Contact | The Daily Muse</title>
+    <meta
+      name="description"
+      content="Get in touch with The Daily Muse. We'd love to hear from you."
+    />
+
+    <!-- Preconnect to Google Fonts for performance -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+    <!-- Google Fonts: Playfair Display for headings, Inter for body text -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&family=Playfair+Display:wght@600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Our main stylesheet -->
+    <link rel="stylesheet" href="style.css" />
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="Daily Muse.png" />
+  </head>
+  <body>
+    <!-- Dark Mode Toggle -->
+    <button class="dark-mode-toggle" aria-label="Toggle dark mode">
+      <span class="toggle-icon">🌙</span>
+    </button>
+
+    <!-- The Header -->
+    <header class="main-header">
+      <div class="header-content">
+        <h1 class="blog-title">The Daily Muse</h1>
+        <p class="blog-tagline">A Blog for the Curious Mind</p>
+      </div>
+
+      <!-- Search Bar -->
+      <div class="search-container">
+        <input
+          type="text"
+          id="search-input"
+          placeholder="Search articles..."
+          class="search-input"
+        />
+        <button id="search-button" class="search-button" aria-label="Search">
+          <span class="search-icon">🔍</span>
+        </button>
+        <div id="search-results" class="search-results"></div>
+      </div>
+
+      <nav class="main-nav">
+        <a href="Blog.html" class="nav-link">Home</a>
+        <a href="about.html" class="nav-link">About</a>
+        <a href="#" class="nav-link">Archives</a>
+        <a href="contact.html" class="nav-link">Contact</a>
+      </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main-content">
+      <section class="contact-hero">
+        <div class="contact-hero-content">
+          <h2 class="contact-title">Let's Start a Conversation</h2>
+          <p class="contact-subtitle">
+            Your thoughts, questions, and ideas are always welcome here. Whether
+            you have feedback, a story to share, or just want to say hello, we'd
+            love to hear from you.
+          </p>
+        </div>
+      </section>
+
+      <div class="contact-container">
+        <div class="contact-content">
+          <!-- Contact Form -->
+          <section class="contact-form-section">
+            <h3>Send Us a Message</h3>
+            <form class="contact-form" id="contactForm">
+              <div class="form-group">
+                <label for="name">Your Name</label>
+                <input type="text" id="name" name="name" required />
+              </div>
+
+              <div class="form-group">
+                <label for="email">Email Address</label>
+                <input type="email" id="email" name="email" required />
+              </div>
+
+              <div class="form-group">
+                <label for="subject">Subject</label>
+                <select id="subject" name="subject" required>
+                  <option value="">Choose a topic...</option>
+                  <option value="feedback">Feedback</option>
+                  <option value="question">Question</option>
+                  <option value="collaboration">Collaboration</option>
+                  <option value="suggestion">Article Suggestion</option>
+                  <option value="other">Other</option>
+                </select>
+              </div>
+
+              <div class="form-group">
+                <label for="message">Your Message</label>
+                <textarea
+                  id="message"
+                  name="message"
+                  rows="6"
+                  required
+                ></textarea>
+              </div>
+
+              <button type="submit" class="submit-btn">
+                <span class="btn-text">Send Message</span>
+                <span class="btn-loading" style="display: none"
+                  >Sending...</span
+                >
+              </button>
+            </form>
+          </section>
+
+          <!-- Contact Info -->
+          <section class="contact-info-section">
+            <h3>Other Ways to Connect</h3>
+            <div class="contact-methods">
+              <div class="contact-method">
+                <div class="method-icon">📧</div>
+                <div class="method-content">
+                  <h4>Email</h4>
+                  <p>hello@thedailymuse.com</p>
+                  <span class="method-note"
+                    >We typically respond within 24 hours</span
+                  >
+                </div>
+              </div>
+
+              <div class="contact-method">
+                <div class="method-icon">💼</div>
+                <div class="method-content">
+                  <h4>Newsletter</h4>
+                  <p>Join our community of curious minds</p>
+                  <span class="method-note"
+                    >Weekly insights and exclusive content</span
+                  >
+                </div>
+              </div>
+
+              <div class="contact-method">
+                <div class="method-icon">🌍</div>
+                <div class="method-content">
+                  <h4>Social Media</h4>
+                  <p>Follow along for daily inspiration</p>
+                  <span class="method-note">Twitter, Instagram, LinkedIn</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- FAQ Section -->
+            <div class="faq-section">
+              <h4>Frequently Asked Questions</h4>
+              <div class="faq-list">
+                <details class="faq-item">
+                  <summary class="faq-question">
+                    How often do you publish new articles?
+                  </summary>
+                  <div class="faq-answer">
+                    We publish 2-3 new articles every week, exploring topics
+                    across mindfulness, creativity, and personal growth.
+                  </div>
+                </details>
+
+                <details class="faq-item">
+                  <summary class="faq-question">
+                    Can I suggest a topic for an article?
+                  </summary>
+                  <div class="faq-answer">
+                    Absolutely! We love hearing topic suggestions from our
+                    readers. Use the form above or email us directly.
+                  </div>
+                </details>
+
+                <details class="faq-item">
+                  <summary class="faq-question">
+                    Do you accept guest posts?
+                  </summary>
+                  <div class="faq-answer">
+                    We occasionally feature guest writers whose work aligns with
+                    our philosophy. Please reach out with your ideas and writing
+                    samples.
+                  </div>
+                </details>
+              </div>
+            </div>
+          </section>
+        </div>
+      </div>
+    </main>
+
+    <script src="script.js"></script>
+    <script>
+      // Contact form handling
+      document
+        .getElementById("contactForm")
+        .addEventListener("submit", function (e) {
+          e.preventDefault();
+
+          const submitBtn = this.querySelector(".submit-btn");
+          const btnText = submitBtn.querySelector(".btn-text");
+          const btnLoading = submitBtn.querySelector(".btn-loading");
+
+          // Show loading state
+          btnText.style.display = "none";
+          btnLoading.style.display = "inline";
+          submitBtn.disabled = true;
+
+          // Simulate form submission
+          setTimeout(() => {
+            // Show success message (in a real app, you'd send data to a server)
+            alert("Thank you for your message! We'll get back to you soon.");
+
+            // Reset form and button
+            this.reset();
+            btnText.style.display = "inline";
+            btnLoading.style.display = "none";
+            submitBtn.disabled = false;
+          }, 1500);
+        });
+    </script>
+  </body>
+</html>

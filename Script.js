@@ -3,6 +3,12 @@ document.addEventListener("DOMContentLoaded", function () {
   const darkModeToggle = document.querySelector(".dark-mode-toggle");
   const toggleIcon = document.querySelector(".toggle-icon");
 
+  // Check if elements exist before proceeding
+  if (!darkModeToggle || !toggleIcon) {
+    console.warn("Dark mode toggle elements not found");
+    return;
+  }
+
   // Check for saved user preference
   if (localStorage.getItem("darkMode") === "enabled") {
     document.body.classList.add("dark-mode");
@@ -24,15 +30,19 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 });
 
-// Add this to your existing script.js file
-
+// Blog Search Functionality
 class BlogSearch {
   constructor() {
     this.searchInput = document.getElementById("search-input");
     this.searchButton = document.getElementById("search-button");
     this.searchResults = document.getElementById("search-results");
+    this.searchContainer = document.querySelector(".search-container");
     this.articles = [];
-    this.init();
+
+    // Only initialize if search elements exist
+    if (this.searchInput && this.searchButton && this.searchResults) {
+      this.init();
+    }
   }
 
   async init() {

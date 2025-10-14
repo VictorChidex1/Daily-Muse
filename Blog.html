@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>The Daily Muse | A Blog for the Curious Mind</title>
+    <meta
+      name="description"
+      content="A curated collection of thoughts, stories, and discoveries for the perpetually curious."
+    />
+
+    <!-- Preconnect to Google Fonts for performance -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+    <!-- Google Fonts: Playfair Display for headings, Inter for body text -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&family=Playfair+Display:wght@600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Our main stylesheet -->
+    <link rel="stylesheet" href="style.css" />
+
+    <!-- Favicon (you'll add this later) -->
+    <link rel="icon" type="image/x-icon" href="Daily Muse.png" />
+  </head>
+  <body>
+    <!-- Dark Mode Toggle -->
+    <button class="dark-mode-toggle" aria-label="Toggle dark mode">
+      <span class="toggle-icon">🌙</span>
+    </button>
+
+    <!-- The Header - The Welcome Mat to Our Blog -->
+    <header class="main-header">
+      <div class="header-content">
+        <h1 class="blog-title">The Daily Muse</h1>
+        <p class="blog-tagline">A Blog for the Curious Mind</p>
+      </div>
+
+      <!-- ADD SEARCH BAR HERE -->
+      <div class="search-container">
+        <input
+          type="text"
+          id="search-input"
+          placeholder="Search articles..."
+          class="search-input"
+        />
+        <button id="search-button" class="search-button" aria-label="Search">
+          <span class="search-icon">🔍</span>
+        </button>
+        <div id="search-results" class="search-results"></div>
+      </div>
+
+      <nav class="main-nav">
+        <a href="index.html" class="nav-link">Home</a>
+        <!-- Now it points back! -->
+        <a href="about.html" class="nav-link">About</a>
+        <a href="#" class="nav-link">Archives</a>
+        <a href="#" class="nav-link">Contact</a>
+      </nav>
+    </header>
+
+    <!-- The Main Content Area (We'll build this next!) -->
+    <!-- The Main Content Area - The Stream of Consciousness -->
+    <main class="main-content">
+      <!-- Blog Post 1 -->
+      <article class="blog-post">
+        <h2 class="post-title">The Art of Asking Questions</h2>
+        <p class="post-meta">
+          Published on <time datetime="2023-10-27">October 27, 2023</time>
+        </p>
+        <div class="post-content">
+          <p>
+            It occurred to me the other day that we spend most of our early
+            lives being taught how to answer questions, and almost no time
+            learning how to ask them. Yet, the question is the engine of
+            thought. A single, well-framed question can be more valuable than a
+            dozen correct answers...
+          </p>
+        </div>
+        <a href="the-art-of-asking-questions.html" class="read-more"
+          >Continue Reading...</a
+        >
+      </article>
+
+      <!-- Blog Post 2 -->
+      <article class="blog-post">
+        <h2 class="post-title">Finding Silence in a Noisy World</h2>
+        <p class="post-meta">
+          Published on <time datetime="2023-10-21">October 21, 2023</time>
+        </p>
+        <div class="post-content">
+          <p>
+            Silence is not the absence of sound. It's the presence of a
+            different kind of clarity. In the constant hum of notifications and
+            the endless scroll of digital content, we've lost touch with the
+            productive, creative power of true silence...
+          </p>
+        </div>
+        <a href="finding-silence-in-a-noisy-world.html" class="read-more"
+          >Continue Reading...</a
+        >
+      </article>
+
+      <!-- Blog Post 3 -->
+      <article class="blog-post">
+        <h2 class="post-title">The Unseen Architecture of Routine</h2>
+        <p class="post-meta">
+          Published on <time datetime="2023-10-15">October 15, 2023</time>
+        </p>
+        <div class="post-content">
+          <p>
+            We often think of routine as the enemy of spontaneity, the dull
+            cousin of creativity. But what if we've got it backwards? A routine
+            isn't a cage; it's the trellis that allows the vine of your
+            creativity to grow upward without being choked by the weeds of daily
+            decision fatigue.
+          </p>
+        </div>
+        <a href="the-unseen-architecture-of-routine.html" class="read-more"
+          >Continue Reading...</a
+        >
+      </article>
+
+      <!-- Blog Post 4 -->
+      <article class="blog-post">
+        <h2 class="post-title">The Permission to Be Unproductive</h2>
+        <p class="post-meta">
+          Published on <time datetime="2023-10-09">October 9, 2023</time>
+        </p>
+        <div class="post-content">
+          <p>
+            In a world that worships at the altar of productivity, where every
+            hobby should be a "hustle" and every moment "optimized," the most
+            radical act is to do nothing at all. We have forgotten that the
+            human brain is not a machine to be driven, but an ecosystem to be
+            cultivated.
+          </p>
+        </div>
+
+        <a href="the-permission-to-be-unproductive.html" class="read-more"
+          >Continue Reading...</a
+        >
+      </article>
+
+      <!-- Blog Post 5 -->
+      <article class="blog-post">
+        <h2 class="post-title">The Wisdom of a Beginner's Mind</h2>
+        <p class="post-meta">
+          Published on <time datetime="2023-10-02">October 2, 2023</time>
+        </p>
+        <div class="post-content">
+          <p>
+            There is a seductive comfort in expertise. After years in any
+            field—be it your career, a relationship, or a creative pursuit—you
+            begin to map the terrain. You know the shortcuts, the pitfalls, the
+            well-trodden paths that lead to acceptable outcomes.
+          </p>
+        </div>
+
+        <a href="the-wisdom-of-a-beginners-mind.html" class="read-more"
+          >Continue Reading...</a
+        >
+      </article>
+
+      <!-- Blog Post 6 -->
+      <article class="blog-post">
+        <h2 class="post-title">The Slow Art of Deep Attention</h2>
+        <p class="post-meta">
+          Published on <time datetime="2023-10-31">October 31, 2023</time>
+        </p>
+        <div class="post-content">
+          <p>
+            We live in an economy of attention, and ours is a currency
+            constantly under assault. Notifications, endless feeds,
+            multi-tasking—we have been trained to skim the surface of the world,
+            mistaking a high-speed tour for genuine exploration.
+          </p>
+        </div>
+
+        <a href="the-slow-art-of-deep-attention.html" class="read-more"
+          >Continue Reading...</a
+        >
+      </article>
+
+      <!-- Blog Post 7 -->
+      <article class="blog-post">
+        <h2 class="post-title">The Unlikely Connections</h2>
+        <p class="post-meta">
+          Published on <time datetime="2023-11-2">November 2, 2023</time>
+        </p>
+        <div class="post-content">
+          <p>
+            We are taught to specialize, to dive deep into a single silo of
+            knowledge. Our education systems, our career ladders, all reinforce
+            the idea of the expert who knows everything about one thing. But I
+            am increasingly convinced that the most profound breakthroughs, the
+            ideas that truly change our personal lives and our world do not come
+            from diving deeper into a single well.
+          </p>
+        </div>
+
+        <a href="the-unlikely-connections.html" class="read-more"
+          >Continue Reading...</a
+        >
+      </article>
+
+      <!-- Blog Post 8 -->
+      <article class="blog-post">
+        <h2 class="post-title">The Power of Negative Space</h2>
+        <p class="post-meta">
+          Published on <time datetime="2023-11-5">November 5, 2023</time>
+        </p>
+        <div class="post-content">
+          <p>
+            In art, composition is everything. But what often goes unappreciated
+            by the untrained eye is the role of negative space, the empty areas
+            around and between the subject. This is not passive emptiness. It is
+            an active element of the design.
+          </p>
+        </div>
+
+        <a href="the-power-of-negative-Space.html" class="read-more"
+          >Continue Reading...</a
+        >
+      </article>
+
+      <!-- Blog Post 9 -->
+      <article class="blog-post">
+        <h2 class="post-title">The Stories We Wear</h2>
+        <p class="post-meta">
+          Published on <time datetime="2023-11-8">November 8, 2023</time>
+        </p>
+        <div class="post-content">
+          <p>
+            We often think of our identity as a fixed, internal essence—a core
+            self. But I've come to understand it as something more fluid and
+            active: a collection of stories we tell ourselves, narratives we don
+            like clothing every single day.
+          </p>
+        </div>
+
+        <a href="the-stories-we-wear.html" class="read-more"
+          >Continue Reading...</a
+        >
+      </article>
+
+      <!-- Blog Post 10 -->
+      <article class="blog-post">
+        <h2 class="post-title">The Grace of a Good End</h2>
+        <p class="post-meta">
+          Published on <time datetime="2023-11-11">November 11, 2023</time>
+        </p>
+        <div class="post-content">
+          <p>
+            Our culture is infatuated with beginnings. We celebrate the new
+            year, the new job, the new project, the clean slate. We have endless
+            advice on how to start strong. But we are remarkably illiterate when
+            it comes to endings. We let projects fizzle out from lack of
+            interest.
+          </p>
+        </div>
+
+        <a href="the-grace-of-a-good-end.html" class="read-more"
+          >Continue Reading...</a
+        >
+      </article>
+
+      <!-- Blog Post 11 -->
+      <article class="blog-post">
+        <h2 class="post-title">The Intelligence of Your Hands</h2>
+        <p class="post-meta">
+          Published on <time datetime="2023-11-14">November 14, 2023</time>
+        </p>
+        <div class="post-content">
+          <p>
+            We have come to equate intelligence with what happens between our
+            ears—the speed of our processing, the breadth of our recall. We live
+            increasingly in our heads, in a whirlwind of abstract thought and
+            digital interaction. But this overlooks a vast, ancient, and
+            profound reservoir of wisdom: the intelligence of our hands.
+          </p>
+        </div>
+
+        <a href="the-intelligence-of-your-hands.html" class="read-more"
+          >Continue Reading...</a
+        >
+      </article>
+
+      <!-- Blog Post 12 -->
+      <article class="blog-post">
+        <h2 class="post-title">The Courage of a Changed Mind</h2>
+        <p class="post-meta">
+          Published on <time datetime="2023-11-17">November 17, 2023</time>
+        </p>
+        <div class="post-content">
+          <p>
+            We are raised to value consistency. We are told to "stand our
+            ground," to "stick to our principles." In the public sphere,
+            changing your mind is often portrayed as a "flip-flop," a sign of
+            weakness, a lack of conviction. We build our identities around our
+            beliefs, and to change a belief can feel like a betrayal of the
+            self.
+          </p>
+        </div>
+
+        <a href="the-courage-of-a-changed-mind.html" class="read-more"
+          >Continue Reading...</a
+        >
+      </article>
+
+      <!-- Blog Post 13 -->
+      <article class="blog-post">
+        <h2 class="post-title">The Rhythm of the Seasons</h2>
+        <p class="post-meta">
+          Published on <time datetime="2023-11-20">November 20, 2023</time>
+        </p>
+        <div class="post-content">
+          <p>
+            Modernity has placed us in a state of perpetual, climate-controlled
+            summer. Our food, our work, our entertainment are available in a
+            constant, undifferentiated stream, 24/7/365. We have insulated
+            ourselves from the most fundamental rhythm of the natural world: the
+            cycle of the seasons.
+          </p>
+        </div>
+
+        <a href="the-rhythm-of-the-seasons.html" class="read-more"
+          >Continue Reading...</a
+        >
+      </article>
+
+      <!-- Blog Post 14 -->
+      <article class="blog-post">
+        <h2 class="post-title">The Beauty of a Wobble</h2>
+        <p class="post-meta">
+          Published on <time datetime="2023-11-23">November 23, 2023</time>
+        </p>
+        <div class="post-content">
+          <p>
+            We are sold a vision of balance as a static, perfect state of
+            equilibrium. We imagine it as the top of a mountain: once we arrive,
+            we can plant our flag and enjoy the stable, serene view forever.
+            Life, in this model, is a linear journey upward.
+          </p>
+        </div>
+
+        <a href="the-beauty-of-a-wobble.html" class="read-more"
+          >Continue Reading...</a
+        >
+      </article>
+    </main>
+    <script src="script.js"></script>
+  </body>
+</html>

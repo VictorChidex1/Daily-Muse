@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>About The Daily Muse | A Blog for the Curious Mind</title>
+    <meta
+      name="description"
+      content="The story and philosophy behind The Daily Muse, a sanctuary for curious minds and unexplored ideas."
+    />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&family=Playfair+Display:wght@600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css" />
+    <link rel="icon" type="image/x-icon" href="Daily Muse.png" />
+  </head>
+  <body>
+    <!-- Dark Mode Toggle -->
+    <button class="dark-mode-toggle" aria-label="Toggle dark mode">
+      <span class="toggle-icon">🌙</span>
+    </button>
+    <header class="main-header">
+      <div class="header-content">
+        <a href="index.html" style="text-decoration: none; color: inherit">
+          <h1 class="blog-title">The Daily Muse</h1>
+          <p class="blog-tagline">A Blog for the Curious Mind</p>
+        </a>
+      </div>
+
+      <!-- ADD SEARCH BAR HERE -->
+      <div class="search-container">
+        <input
+          type="text"
+          id="search-input"
+          placeholder="Search articles..."
+          class="search-input"
+        />
+        <button id="search-button" class="search-button" aria-label="Search">
+          <span class="search-icon">🔍</span>
+        </button>
+        <div id="search-results" class="search-results"></div>
+      </div>
+
+      <nav class="main-nav">
+        <a href="index.html" class="nav-link">Home</a>
+        <a href="blog.html" class="nav-link">Blog</a>
+        <!-- This is the current page, we can style it differently later if we want -->
+        <a href="about.html" class="nav-link">About</a>
+        <a href="#" class="nav-link">Contact</a>
+      </nav>
+    </header>
+
+    <main class="main-content">
+      <article class="about-page">
+        <!-- The Hero Section for the About Page -->
+        <section class="about-hero">
+          <h2>Welcome to Your Sanctuary for Unexplored Ideas.</h2>
+          <p class="lead-text">
+            This is more than a blog. It's a conversation with curiosity itself.
+          </p>
+        </section>
+
+        <!-- The Story Section -->
+        <section class="about-story">
+          <h3>The Story Behind the Muse</h3>
+          <p>
+            Every great journey begins with a question. For The Daily Muse, that
+            question was:
+            <em
+              >"What happens to all the quiet ideas that don't fit in a tweet,
+              the lingering questions that aren't urgent enough for a meeting,
+              the sudden moments of clarity that arrive unannounced?"</em
+            >
+          </p>
+
+          <p>
+            This platform was born from the belief that these fragments of
+            thought are not insignificant. They are the raw material of insight,
+            the seeds of innovation, and the quiet heartbeat of a thinking mind.
+          </p>
+
+          <p>
+            It started not as a plan, but as a practice, a commitment to paying
+            attention to the world and one's own place within it. The Daily Muse
+            is the public manifestation of that private practice.
+          </p>
+        </section>
+
+        <!-- The Philosophy Section -->
+        <section class="about-philosophy">
+          <h3>Our Philosophy</h3>
+          <p>
+            We believe in the power of the question over the certainty of the
+            answer. We value depth over speed, and connection over fame. Here,
+            you won't find life hacks or list promising easy solutions. You will
+            find thoughtful explorations of the complex, beautiful, and often
+            messy human experience.
+          </p>
+
+          <p>Our core tenets are simple:</p>
+          <ul>
+            <li>
+              <strong>Curiosity is a Compass:</strong> It guides us to more
+              interesting places than certainty ever could.
+            </li>
+            <li>
+              <strong>Thoughts Need Space:</strong> Ideas deserve room to
+              breathe, to be developed fully, and to exist without immediate
+              utility.
+            </li>
+            <li>
+              <strong>Clarity is Kindness:</strong> We strive to write with
+              clarity and depth, treating both the subject and the reader with
+              respect.
+            </li>
+          </ul>
+        </section>
+
+        <!-- The Invitation Section -->
+        <section class="about-invitation">
+          <h3>Join the Conversation</h3>
+          <p>
+            The Daily Muse is not a monologue. It is an invitation. An
+            invitation to wander, to wonder, and to connect your own curiosity
+            to the ideas you find here.
+          </p>
+          <p>Thank you for visiting. We're truly glad you're here.</p>
+          <a href="blog.html" class="read-more">Explore the Writings</a>
+        </section>
+      </article>
+    </main>
+    <script src="script.js"></script>
+  </body>
+</html>

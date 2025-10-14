@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Related Posts Generator - The Daily Muse</title>
+    <style>
+      body {
+        font-family: "Inter", Arial, sans-serif;
+        padding: 30px;
+        max-width: 900px;
+        margin: 0 auto;
+        background: #fcfaf7;
+        color: #1a1a1a;
+      }
+      .output {
+        background: white;
+        padding: 25px;
+        margin: 25px 0;
+        border-radius: 12px;
+        border: 1px solid #f5f2ed;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.04);
+      }
+      textarea {
+        width: 100%;
+        height: 400px;
+        padding: 20px;
+        border: 2px solid #8b7355;
+        border-radius: 8px;
+        font-family: monospace;
+        font-size: 14px;
+        line-height: 1.4;
+      }
+      button {
+        background: #8b7355;
+        color: white;
+        padding: 14px 28px;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+        font-size: 16px;
+        font-weight: 500;
+        transition: all 0.3s ease;
+        margin: 10px 5px;
+      }
+      button:hover {
+        background: #1a1a1a;
+        transform: translateY(-2px);
+      }
+      select,
+      input {
+        width: 100%;
+        padding: 12px;
+        margin: 8px 0 20px 0;
+        border: 1px solid #ddd;
+        border-radius: 6px;
+        font-size: 15px;
+      }
+      label {
+        font-weight: 600;
+        color: #1a1a1a;
+        display: block;
+        margin-top: 10px;
+      }
+      h1 {
+        color: #1a1a1a;
+        text-align: center;
+        margin-bottom: 10px;
+        font-family: "Playfair Display", serif;
+      }
+      .subtitle {
+        text-align: center;
+        color: #8b7355;
+        margin-bottom: 30px;
+        font-style: italic;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>🎯 Related Posts Generator</h1>
+    <p class="subtitle">
+      The Daily Muse - Create perfect related posts in seconds
+    </p>
+
+    <!-- STEP 1: Choose Current Article -->
+    <label><strong>1. Which article are you working on?</strong></label>
+    <select id="currentArticle">
+      <option value="">-- Select Current Article --</option>
+      <option value="the-art-of-asking-questions.html">
+        The Art of Asking Questions
+      </option>
+      <option value="finding-silence-in-a-noisy-world.html">
+        Finding Silence in a Noisy World
+      </option>
+      <option value="the-unseen-architecture-of-routine.html">
+        The Unseen Architecture of Routine
+      </option>
+      <option value="the-permission-to-be-unproductive.html">
+        The Permission to Be Unproductive
+      </option>
+      <option value="the-wisdom-of-a-beginners-mind.html">
+        The Wisdom of a Beginner's Mind
+      </option>
+      <option value="the-slow-art-of-deep-attention.html">
+        The Slow Art of Deep Attention
+      </option>
+      <option value="the-unlikely-connections.html">
+        The Unlikely Connections
+      </option>
+      <option value="the-power-of-negative-Space.html">
+        The Power of Negative Space
+      </option>
+      <option value="the-stories-we-wear.html">The Stories We Wear</option>
+      <option value="the-grace-of-a-good-end.html">
+        The Grace of a Good End
+      </option>
+      <option value="the-intelligence-of-your-hands.html">
+        The Intelligence of Your Hands
+      </option>
+      <option value="the-courage-of-a-changed-mind.html">
+        The Courage of a Changed Mind
+      </option>
+      <option value="the-rhythm-of-the-seasons.html">
+        The Rhythm of the Seasons
+      </option>
+      <option value="the-beauty-of-a-wobble.html">
+        The Beauty of a Wobble
+      </option>
+    </select>
+
+    <!-- STEP 2: Choose Related Articles -->
+    <div style="margin: 30px 0">
+      <label><strong>2. Choose 4 related articles:</strong></label>
+
+      <select id="related1">
+        <option value="">-- First Related Article --</option>
+        <option value="the-art-of-asking-questions.html">
+          The Art of Asking Questions
+        </option>
+        <option value="finding-silence-in-a-noisy-world.html">
+          Finding Silence in a Noisy World
+        </option>
+        <option value="the-unseen-architecture-of-routine.html">
+          The Unseen Architecture of Routine
+        </option>
+        <option value="the-permission-to-be-unproductive.html">
+          The Permission to Be Unproductive
+        </option>
+        <option value="the-wisdom-of-a-beginners-mind.html">
+          The Wisdom of a Beginner's Mind
+        </option>
+        <option value="the-slow-art-of-deep-attention.html">
+          The Slow Art of Deep Attention
+        </option>
+        <option value="the-unlikely-connections.html">
+          The Unlikely Connections
+        </option>
+        <option value="the-power-of-negative-Space.html">
+          The Power of Negative Space
+        </option>
+        <option value="the-stories-we-wear.html">The Stories We Wear</option>
+        <option value="the-grace-of-a-good-end.html">
+          The Grace of a Good End
+        </option>
+        <option value="the-intelligence-of-your-hands.html">
+          The Intelligence of Your Hands
+        </option>
+        <option value="the-courage-of-a-changed-mind.html">
+          The Courage of a Changed Mind
+        </option>
+        <option value="the-rhythm-of-the-seasons.html">
+          The Rhythm of the Seasons
+        </option>
+        <option value="the-beauty-of-a-wobble.html">
+          The Beauty of a Wobble
+        </option>
+      </select>
+
+      <select id="related2">
+        <option value="">-- Second Related Article --</option>
+        <option value="the-art-of-asking-questions.html">
+          The Art of Asking Questions
+        </option>
+        <option value="finding-silence-in-a-noisy-world.html">
+          Finding Silence in a Noisy World
+        </option>
+        <option value="the-unseen-architecture-of-routine.html">
+          The Unseen Architecture of Routine
+        </option>
+        <option value="the-permission-to-be-unproductive.html">
+          The Permission to Be Unproductive
+        </option>
+        <option value="the-wisdom-of-a-beginners-mind.html">
+          The Wisdom of a Beginner's Mind
+        </option>
+        <option value="the-slow-art-of-deep-attention.html">
+          The Slow Art of Deep Attention
+        </option>
+        <option value="the-unlikely-connections.html">
+          The Unlikely Connections
+        </option>
+        <option value="the-power-of-negative-Space.html">
+          The Power of Negative Space
+        </option>
+        <option value="the-stories-we-wear.html">The Stories We Wear</option>
+        <option value="the-grace-of-a-good-end.html">
+          The Grace of a Good End
+        </option>
+        <option value="the-intelligence-of-your-hands.html">
+          The Intelligence of Your Hands
+        </option>
+        <option value="the-courage-of-a-changed-mind.html">
+          The Courage of a Changed Mind
+        </option>
+        <option value="the-rhythm-of-the-seasons.html">
+          The Rhythm of the Seasons
+        </option>
+        <option value="the-beauty-of-a-wobble.html">
+          The Beauty of a Wobble
+        </option>
+      </select>
+
+      <select id="related3">
+        <option value="">-- Third Related Article --</option>
+        <option value="the-art-of-asking-questions.html">
+          The Art of Asking Questions
+        </option>
+        <option value="finding-silence-in-a-noisy-world.html">
+          Finding Silence in a Noisy World
+        </option>
+        <option value="the-unseen-architecture-of-routine.html">
+          The Unseen Architecture of Routine
+        </option>
+        <option value="the-permission-to-be-unproductive.html">
+          The Permission to Be Unproductive
+        </option>
+        <option value="the-wisdom-of-a-beginners-mind.html">
+          The Wisdom of a Beginner's Mind
+        </option>
+        <option value="the-slow-art-of-deep-attention.html">
+          The Slow Art of Deep Attention
+        </option>
+        <option value="the-unlikely-connections.html">
+          The Unlikely Connections
+        </option>
+        <option value="the-power-of-negative-Space.html">
+          The Power of Negative Space
+        </option>
+        <option value="the-stories-we-wear.html">The Stories We Wear</option>
+        <option value="the-grace-of-a-good-end.html">
+          The Grace of a Good End
+        </option>
+        <option value="the-intelligence-of-your-hands.html">
+          The Intelligence of Your Hands
+        </option>
+        <option value="the-courage-of-a-changed-mind.html">
+          The Courage of a Changed Mind
+        </option>
+        <option value="the-rhythm-of-the-seasons.html">
+          The Rhythm of the Seasons
+        </option>
+        <option value="the-beauty-of-a-wobble.html">
+          The Beauty of a Wobble
+        </option>
+      </select>
+
+      <select id="related4">
+        <option value="">-- Fourth Related Article --</option>
+        <option value="the-art-of-asking-questions.html">
+          The Art of Asking Questions
+        </option>
+        <option value="finding-silence-in-a-noisy-world.html">
+          Finding Silence in a Noisy World
+        </option>
+        <option value="the-unseen-architecture-of-routine.html">
+          The Unseen Architecture of Routine
+        </option>
+        <option value="the-permission-to-be-unproductive.html">
+          The Permission to Be Unproductive
+        </option>
+        <option value="the-wisdom-of-a-beginners-mind.html">
+          The Wisdom of a Beginner's Mind
+        </option>
+        <option value="the-slow-art-of-deep-attention.html">
+          The Slow Art of Deep Attention
+        </option>
+        <option value="the-unlikely-connections.html">
+          The Unlikely Connections
+        </option>
+        <option value="the-power-of-negative-Space.html">
+          The Power of Negative Space
+        </option>
+        <option value="the-stories-we-wear.html">The Stories We Wear</option>
+        <option value="the-grace-of-a-good-end.html">
+          The Grace of a Good End
+        </option>
+        <option value="the-intelligence-of-your-hands.html">
+          The Intelligence of Your Hands
+        </option>
+        <option value="the-courage-of-a-changed-mind.html">
+          The Courage of a Changed Mind
+        </option>
+        <option value="the-rhythm-of-the-seasons.html">
+          The Rhythm of the Seasons
+        </option>
+        <option value="the-beauty-of-a-wobble.html">
+          The Beauty of a Wobble
+        </option>
+      </select>
+    </div>
+
+    <button onclick="generateHTML()">✨ Generate Related Posts HTML</button>
+    <button onclick="clearSelections()">🔄 Clear Selections</button>
+
+    <div class="output">
+      <h3>📋 Copy This Code:</h3>
+      <textarea id="output" readonly></textarea>
+      <button onclick="copyToClipboard()">📋 Copy to Clipboard</button>
+      <button onclick="selectAllText()">🔍 Select All Text</button>
+    </div>
+
+    <script>
+      // YOUR COMPLETE ARTICLE DATABASE - ALL 14 ARTICLES
+      const articles = {
+        "the-art-of-asking-questions.html": {
+          title: "The Art of Asking Questions",
+          description:
+            "It occurred to me the other day that we spend most of our early lives being taught how to answer questions, and almost no time learning how to ask them.",
+          readTime: "5 min read",
+        },
+        "finding-silence-in-a-noisy-world.html": {
+          title: "Finding Silence in a Noisy World",
+          description:
+            "Silence is not the absence of sound. It's the presence of a different kind of clarity. In the constant hum of notifications and the endless scroll of digital content, we've lost touch with the productive, creative power of true silence...",
+          readTime: "5 min read",
+        },
+        "the-unseen-architecture-of-routine.html": {
+          title: "The Unseen Architecture of Routine",
+          description:
+            "We often think of routine as the enemy of spontaneity, the dull cousin of creativity. But what if we've got it backwards? A routine isn't a cage; it's the trellis that allows the vine of your creativity to grow upward without being choked by the weeds of daily decision fatigue.",
+          readTime: "4 min read",
+        },
+        "the-permission-to-be-unproductive.html": {
+          title: "The Permission to Be Unproductive",
+          description:
+            "In a world that worships at the altar of productivity, where every hobby should be a 'hustle' and every moment 'optimized,' the most radical act is to do nothing at all.",
+          readTime: "4 min read",
+        },
+        "the-wisdom-of-a-beginners-mind.html": {
+          title: "The Wisdom of a Beginner's Mind",
+          description:
+            "Expertise, while valuable, can blind us to new possibilities. This article explores the Zen concept of the 'Beginner's Mind' (Shoshin) as a practice of intellectual humility, arguing that consciously shedding our preconceptions allows us to see familiar problems and projects with fresh, creative eyes.",
+          readTime: "4 min read",
+        },
+        "the-slow-art-of-deep-attention.html": {
+          title: "The Slow Art of Deep Attention",
+          description:
+            "In our distracted age, the ability to offer our deep, undivided attention is a rare and valuable skill. This article makes a case for moving beyond mere focus to a state of immersive, reverent engagement with the world, arguing that true understanding and connection are found in depth, not breadth.",
+          readTime: "3 min read",
+        },
+        "the-unlikely-connections.html": {
+          title: "The Unlikely Connections",
+          description:
+            "We are taught to specialize, to dive deep into a single silo of knowledge. Our education systems, our career ladders, all reinforce the idea of the expert who knows everything about one thing.",
+          readTime: "3 min read",
+        },
+        "the-power-of-negative-Space.html": {
+          title: "The Power of Negative Space",
+          description:
+            "In art, composition is everything. But what often goes unappreciated by the untrained eye is the role of negative space—the empty areas around and between the subject.",
+          readTime: "5 min read",
+        },
+        "the-stories-we-wear.html": {
+          title: "The Stories We Wear",
+          description:
+            "We often think of our identity as a fixed, internal essence—a core self. But I've come to understand it as something more fluid and active: a collection of stories we tell ourselves, narratives we don like clothing every single day.",
+          readTime: "4 min read",
+        },
+        "the-grace-of-a-good-end.html": {
+          title: "The Grace of a Good End",
+          description:
+            "Our culture is infatuated with beginnings. We celebrate the new year, the new job, the new project, the clean slate. We have endless advice on how to start strong. But we are remarkably illiterate when it comes to endings. We let projects fizzle out from lack of interest.",
+          readTime: "5 min read",
+        },
+        "the-intelligence-of-your-hands.html": {
+          title: "The Intelligence of Your Hands",
+          description:
+            "We have come to equate intelligence with what happens between our ears—the speed of our processing, the breadth of our recall. We live increasingly in our heads, in a whirlwind of abstract thought and digital interaction.",
+          readTime: "4 min read",
+        },
+        "the-courage-of-a-changed-mind.html": {
+          title: "The Courage of a Changed Mind",
+          description:
+            "We are raised to value consistency. We are told to 'stand our ground,' to 'stick to our principles.' In the public sphere, changing your mind is often portrayed as a 'flip-flop,' a sign of weakness, a lack of conviction.",
+          readTime: "3 min read",
+        },
+        "the-rhythm-of-the-seasons.html": {
+          title: "The Rhythm of the Seasons",
+          description:
+            "Modernity has placed us in a state of perpetual, climate-controlled summer. Our food, our work, our entertainment are available in a constant, undifferentiated stream, 24/7/365. We have insulated ourselves from the most fundamental rhythm of the natural world: the cycle of the seasons.",
+          readTime: "4 min read",
+        },
+        "the-beauty-of-a-wobble.html": {
+          title: "The Beauty of a Wobble",
+          description:
+            "We are sold a vision of balance as a static, perfect state of equilibrium. We imagine it as the top of a mountain: once we arrive, we can plant our flag and enjoy the stable, serene view forever. Life, in this model, is a linear journey upward.",
+          readTime: "4 min read",
+        },
+      };
+
+      function generateHTML() {
+        const related1 = document.getElementById("related1").value;
+        const related2 = document.getElementById("related2").value;
+        const related3 = document.getElementById("related3").value;
+        const related4 = document.getElementById("related4").value;
+
+        const relatedArticles = [related1, related2, related3, related4].filter(
+          Boolean
+        );
+
+        if (relatedArticles.length !== 4) {
+          alert("Please select exactly 4 related articles");
+          return;
+        }
+
+        let html = `<!-- RELATED POSTS SECTION -->\n<section class="related-posts">\n    <h3 class="related-title">Continue Your Journey</h3>\n    <p class="related-subtitle">More musings you might enjoy</p>\n    \n    <div class="related-grid">\n`;
+
+        relatedArticles.forEach((article, index) => {
+          const data = articles[article];
+          if (data) {
+            html += `        <!-- Related Post ${index + 1} -->\n`;
+            html += `        <article class="related-post">\n`;
+            html += `            <a href="${article}" class="related-link">\n`;
+            html += `                <h4>${data.title}</h4>\n`;
+            html += `                <p>${data.description}</p>\n`;
+            html += `                <span class="related-meta">${data.readTime}</span>\n`;
+            html += `            </a>\n`;
+            html += `        </article>\n\n`;
+          }
+        });
+
+        html += `    </div>\n</section>`;
+
+        document.getElementById("output").value = html;
+      }
+
+      function clearSelections() {
+        document.getElementById("currentArticle").value = "";
+        document.getElementById("related1").value = "";
+        document.getElementById("related2").value = "";
+        document.getElementById("related3").value = "";
+        document.getElementById("related4").value = "";
+        document.getElementById("output").value = "";
+      }
+
+      function copyToClipboard() {
+        const textarea = document.getElementById("output");
+        textarea.select();
+        document.execCommand("copy");
+        alert("✅ Copied to clipboard!");
+      }
+
+      function selectAllText() {
+        const textarea = document.getElementById("output");
+        textarea.select();
+      }
+    </script>
+  </body>
+</html>

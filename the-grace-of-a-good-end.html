@@ -205,6 +205,54 @@
           </article>
         </div>
       </section>
+
+      <!-- Comments Section -->
+      <section class="comments-section">
+        <div class="comments-header">
+          <h3 class="comments-title">Join the Conversation</h3>
+          <p class="comments-subtitle">
+            Share your thoughts and insights with fellow curious minds
+          </p>
+        </div>
+
+        <!-- Comment Form -->
+        <div class="comment-form-container">
+          <h4 class="comment-form-title">Leave a Comment</h4>
+          <form class="comment-form" id="commentForm">
+            <div class="comment-form-fields">
+              <div class="comment-form-group">
+                <label for="comment-name">Your Name *</label>
+                <input type="text" id="comment-name" name="name" required />
+              </div>
+              <div class="comment-form-group">
+                <label for="comment-email">Email Address *</label>
+                <input type="email" id="comment-email" name="email" required />
+              </div>
+              <div class="comment-form-group full-width">
+                <label for="comment-message">Your Comment *</label>
+                <textarea
+                  id="comment-message"
+                  name="message"
+                  placeholder="Share your thoughts, questions, or insights..."
+                  required
+                ></textarea>
+              </div>
+            </div>
+            <button type="submit" class="comment-submit-btn">
+              <span class="btn-text">Post Comment</span>
+              <span class="btn-loading" style="display: none">Posting...</span>
+            </button>
+          </form>
+        </div>
+
+        <!-- Comments List -->
+        <div class="comments-list" id="commentsList">
+          <!-- Comments will be dynamically loaded here -->
+          <div class="no-comments">
+            <p>No comments yet. Be the first to share your thoughts!</p>
+          </div>
+        </div>
+      </section>
     </main>
     <script src="script.js"></script>
   </body>

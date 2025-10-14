@@ -313,3 +313,186 @@ class BlogSearch {
 document.addEventListener("DOMContentLoaded", () => {
   new BlogSearch();
 });
+
+// Comments Section Functionality
+class CommentsSection {
+  constructor() {
+    this.commentForm = document.getElementById("commentForm");
+    this.commentsList = document.getElementById("commentsList");
+    this.comments = this.loadComments();
+    this.init();
+  }
+
+  init() {
+    if (this.commentForm) {
+      this.setupEventListeners();
+      this.displayComments();
+    }
+  }
+
+  setupEventListeners() {
+    this.commentForm.addEventListener("submit", (e) => {
+      e.preventDefault();
+      this.handleCommentSubmit(e);
+    });
+  }
+
+  handleCommentSubmit(e) {
+    const formData = new FormData(e.target);
+    const name = formData.get("name").trim();
+    const email = formData.get("email").trim();
+    const message = formData.get("message").trim();
+
+    const submitBtn = this.commentForm.querySelector(".comment-submit-btn");
+    const btnText = submitBtn.querySelector(".btn-text");
+    const btnLoading = submitBtn.querySelector(".btn-loading");
+
+    // Show loading state
+    btnText.style.display = "none";
+    btnLoading.style.display = "inline";
+    submitBtn.disabled = true;
+
+    // Simulate API call delay
+    setTimeout(() => {
+      const newComment = {
+        id: Date.now(),
+        name: name,
+        email: email,
+        message: message,
+        date: new Date().toISOString(),
+        avatar: this.generateAvatar(name),
+      };
+
+      this.addComment(newComment);
+      this.commentForm.reset();
+
+      // Reset button state
+      btnText.style.display = "inline";
+      btnLoading.style.display = "none";
+      submitBtn.disabled = false;
+
+      // Show success message
+      this.showSuccessMessage();
+    }, 1000);
+  }
+
+  generateAvatar(name) {
+    return name.charAt(0).toUpperCase();
+  }
+
+  addComment(comment) {
+    this.comments.unshift(comment); // Add to beginning
+    this.saveComments();
+    this.displayComments();
+  }
+
+  loadComments() {
+    try {
+      const saved = localStorage.getItem("blogComments");
+      if (saved) {
+        return JSON.parse(saved);
+      }
+    } catch (error) {
+      console.error("Error loading comments:", error);
+    }
+
+    // Return default comments for demonstration
+    return [
+      {
+        id: 1,
+        name: "Sarah Chen",
+        email: "sarah@example.com",
+        message:
+          "This article resonated deeply with me. The part about finding silence in everyday moments is something I've been practicing, and it's truly transformative. Thank you for putting these thoughts into words!",
+        date: "2024-01-15T10:30:00Z",
+        avatar: "S",
+      },
+      {
+        id: 2,
+        name: "Marcus Johnson",
+        email: "marcus@example.com",
+        message:
+          "I've been struggling with the constant need to be productive. Reading this felt like permission to breathe. Have you written more about incorporating these practices into a busy work life?",
+        date: "2024-01-14T16:45:00Z",
+        avatar: "M",
+      },
+    ];
+  }
+
+  saveComments() {
+    try {
+      localStorage.setItem("blogComments", JSON.stringify(this.comments));
+    } catch (error) {
+      console.error("Error saving comments:", error);
+    }
+  }
+
+  displayComments() {
+    if (this.comments.length === 0) {
+      this.commentsList.innerHTML = `
+        <div class="no-comments">
+          <p>No comments yet. Be the first to share your thoughts!</p>
+        </div>
+      `;
+      return;
+    }
+
+    this.commentsList.innerHTML = this.comments
+      .map(
+        (comment) => `
+      <div class="comment" data-comment-id="${comment.id}">
+        <div class="comment-header">
+          <div class="comment-author">
+            <div class="comment-avatar">${comment.avatar}</div>
+            <div class="comment-author-info">
+              <h4>${this.escapeHtml(comment.name)}</h4>
+              <div class="comment-meta">${this.formatDate(comment.date)}</div>
+            </div>
+          </div>
+        </div>
+        <div class="comment-content">
+          <p>${this.escapeHtml(comment.message)}</p>
+        </div>
+      </div>
+    `
+      )
+      .join("");
+  }
+
+  formatDate(dateString) {
+    const date = new Date(dateString);
+    const now = new Date();
+    const diffTime = Math.abs(now - date);
+    const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));
+
+    if (diffDays === 0) {
+      return "Today";
+    } else if (diffDays === 1) {
+      return "Yesterday";
+    } else if (diffDays < 7) {
+      return `${diffDays} days ago`;
+    } else {
+      return date.toLocaleDateString("en-US", {
+        year: "numeric",
+        month: "long",
+        day: "numeric",
+      });
+    }
+  }
+
+  escapeHtml(text) {
+    const div = document.createElement("div");
+    div.textContent = text;
+    return div.innerHTML;
+  }
+
+  showSuccessMessage() {
+    // You could add a toast notification here
+    console.log("Comment posted successfully!");
+  }
+}
+
+// Initialize comments section when DOM is loaded
+document.addEventListener("DOMContentLoaded", () => {
+  new CommentsSection();
+});

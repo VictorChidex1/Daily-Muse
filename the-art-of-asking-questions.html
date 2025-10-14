@@ -68,23 +68,17 @@
           <div class="hero-overlay"></div>
         </div>
         <div class="hero-content">
-          <article class="blog-post full-article">
-            <h1 class="post-title">The Art of Asking Questions</h1>
-            <p class="post-meta">
-              Published on <time datetime="2023-10-27">October 27, 2023</time>
-            </p>
-          </article>
+          <!-- MOVED THE POST TITLE AND META TO THE HERO SECTION -->
+          <h1 class="post-title">The Art of Asking Questions</h1>
+          <p class="post-meta">
+            Published on <time datetime="2023-10-27">October 27, 2023</time>
+          </p>
         </div>
       </section>
 
-      <!-- PASTE YOUR *FULL* ARTICLE HERE -->
+      <!-- MAIN ARTICLE CONTENT (WITHOUT DUPLICATE TITLE) -->
       <article class="blog-post full-article">
-        <h2 class="post-title">The Art of Asking Questions</h2>
-        <p class="post-meta">
-          Published on <time datetime="2023-10-27">October 27, 2023</time>
-        </p>
         <div class="post-content">
-          <!-- DELETE THIS PLACEHOLDER TEXT AND PASTE YOUR FULL, COMPLETE ARTICLE HERE -->
           <p>
             It occurred to me the other day that we spend most of our early
             lives being taught how to answer questions, and almost no time
@@ -134,8 +128,6 @@
             The answers become almost secondary; the real discovery is in the
             asking.
           </p>
-
-          <!-- STOP PASTING HERE -->
         </div>
         <!-- This link takes the reader back to the stream of all posts -->
         <a href="blog.html" class="read-more">&larr; Back to All Posts</a>
@@ -206,6 +198,54 @@
               <span class="related-meta">5 min read</span>
             </a>
           </article>
+        </div>
+      </section>
+
+      <!-- Comments Section -->
+      <section class="comments-section">
+        <div class="comments-header">
+          <h3 class="comments-title">Join the Conversation</h3>
+          <p class="comments-subtitle">
+            Share your thoughts and insights with fellow curious minds
+          </p>
+        </div>
+
+        <!-- Comment Form -->
+        <div class="comment-form-container">
+          <h4 class="comment-form-title">Leave a Comment</h4>
+          <form class="comment-form" id="commentForm">
+            <div class="comment-form-fields">
+              <div class="comment-form-group">
+                <label for="comment-name">Your Name *</label>
+                <input type="text" id="comment-name" name="name" required />
+              </div>
+              <div class="comment-form-group">
+                <label for="comment-email">Email Address *</label>
+                <input type="email" id="comment-email" name="email" required />
+              </div>
+              <div class="comment-form-group full-width">
+                <label for="comment-message">Your Comment *</label>
+                <textarea
+                  id="comment-message"
+                  name="message"
+                  placeholder="Share your thoughts, questions, or insights..."
+                  required
+                ></textarea>
+              </div>
+            </div>
+            <button type="submit" class="comment-submit-btn">
+              <span class="btn-text">Post Comment</span>
+              <span class="btn-loading" style="display: none">Posting...</span>
+            </button>
+          </form>
+        </div>
+
+        <!-- Comments List -->
+        <div class="comments-list" id="commentsList">
+          <!-- Comments will be dynamically loaded here -->
+          <div class="no-comments">
+            <p>No comments yet. Be the first to share your thoughts!</p>
+          </div>
         </div>
       </section>
     </main>

@@ -53,14 +53,24 @@
       </div>
 
       <nav class="main-nav">
-        <a href="blog.html" class="nav-link">Home</a>
+        <a href="index.html" class="nav-link">Home</a>
+        <div class="nav-dropdown">
+          <a href="#" class="nav-link">Categories ▾</a>
+          <div class="dropdown-content">
+            <a href="category-mindfulness.html">🧠 Mindfulness & Attention</a>
+            <a href="category-creativity.html">🎨 Creativity & Process</a>
+            <a href="category-growth.html">🌱 Personal Growth</a>
+            <a href="category-philosophy.html">🔍 Philosophy & Thinking</a>
+            <a href="blog.html">📚 All Articles</a>
+          </div>
+        </div>
         <a href="about.html" class="nav-link">About</a>
-        <a href="#" class="nav-link">Archives</a>
         <a href="contact.html" class="nav-link">Contact</a>
       </nav>
     </header>
 
     <!-- The Hero Section -->
+    <!-- Replace the current category sections in index.html with this: -->
     <main class="main-content">
       <section class="hero">
         <h2 class="hero-title">
@@ -74,68 +84,56 @@
         </p>
       </section>
 
-      <!-- Mindfulness & Attention Category -->
-      <section id="mindfulness" class="articles-category">
-        <h3 class="section-title">Mindfulness & Attention</h3>
-        <p class="category-description">
-          Cultivating presence and focus in a distracted world
-        </p>
+      <!-- Featured Categories Grid -->
+      <section class="categories-grid">
+        <div class="category-card">
+          <div class="category-icon">🧠</div>
+          <h3>Mindfulness & Attention</h3>
+          <p>Cultivating presence and focus in a distracted world</p>
+          <a href="category-mindfulness.html" class="category-link"
+            >Explore 12 Articles →</a
+          >
+        </div>
 
-        <div class="articles-grid">
-          <a href="finding-silence-in-a-noisy-world.html" class="article-card">
-            <h4>Finding Silence in a Noisy World</h4>
-            <p>
-              Silence is not the absence of sound. It's the presence of a
-              different kind of clarity...
-            </p>
-            <span class="read-time">5 min read</span>
-          </a>
+        <div class="category-card">
+          <div class="category-icon">🎨</div>
+          <h3>Creativity & Process</h3>
+          <p>Exploring the architecture of creative work and thinking</p>
+          <a href="category-creativity.html" class="category-link"
+            >Explore 15 Articles →</a
+          >
+        </div>
 
-          <a href="the-slow-art-of-deep-attention.html" class="article-card">
-            <h4>The Slow Art of Deep Attention</h4>
-            <p>
-              In our distracted age, the ability to offer our deep, undivided
-              attention is a rare and valuable skill...
-            </p>
-            <span class="read-time">3 min read</span>
-          </a>
+        <div class="category-card">
+          <div class="category-icon">🌱</div>
+          <h3>Personal Growth</h3>
+          <p>Reflections on identity, change, and living intentionally</p>
+          <a href="category-growth.html" class="category-link"
+            >Explore 10 Articles →</a
+          >
+        </div>
 
-          <a href="the-permission-to-be-unproductive.html" class="article-card">
-            <h4>The Permission to Be Unproductive</h4>
-            <p>
-              In a world that worships at the altar of productivity, the most
-              radical act is to do nothing at all.
-            </p>
-            <span class="read-time">4 min read</span>
-          </a>
-
-          <a href="the-rhythm-of-the-seasons.html" class="article-card">
-            <h4>The Rhythm of the Seasons</h4>
-            <p>
-              Modernity has placed us in a state of perpetual,
-              climate-controlled summer...
-            </p>
-            <span class="read-time">4 min read</span>
-          </a>
+        <div class="category-card">
+          <div class="category-icon">🔍</div>
+          <h3>Philosophy & Thinking</h3>
+          <p>Deep dives into ideas that shape how we see the world</p>
+          <a href="category-philosophy.html" class="category-link"
+            >Explore 8 Articles →</a
+          >
         </div>
       </section>
 
-      <!-- Creativity & Process Category -->
-      <section id="creativity" class="articles-category">
-        <h3 class="section-title">Creativity & Process</h3>
-        <p class="category-description">
-          Exploring the architecture of creative work and thinking
-        </p>
-
+      <!-- Featured Articles Section -->
+      <section class="featured-articles">
+        <h3 class="section-title">Recently Published</h3>
         <div class="articles-grid">
-          <a
-            href="the-unseen-architecture-of-routine.html"
-            class="article-card"
-          >
-            <h4>The Unseen Architecture of Routine</h4>
+          <!-- Only show 4-6 most recent articles -->
+          <a href="finding-silence-in-a-noisy-world.html" class="article-card">
+            <h4>Finding Silence in a Noisy World</h4>
             <p>
-              A routine isn't a cage; it's the trellis that allows the vine of
-              your creativity to grow upward...
+              Silence is not the absence of sound, but the presence of clarity.
+              Discover how to find pockets of quiet in a noisy world to unlock
+              creativity, focus, and a deeper sense of peace....
             </p>
             <span class="read-time">4 min read</span>
           </a>
@@ -143,93 +141,58 @@
           <a href="the-art-of-asking-questions.html" class="article-card">
             <h4>The Art of Asking Questions</h4>
             <p>
-              We spend most of our early lives being taught how to answer
-              questions, and almost no time learning how to ask them.
+              Explore the power of a 'To-Ask' list. Learn how shifting from
+              seeking answers to crafting better questions can unlock deeper
+              thinking and a more curious, engaged life.
             </p>
-            <span class="read-time">5 min read</span>
+            <span class="read-time">3 min read</span>
+          </a>
+
+          <a
+            href="the-unseen-architecture-of-routine.html"
+            class="article-card"
+          >
+            <h4>The Unseen Architecture of Routine</h4>
+            <p>
+              Is your routine a cage or a trellis? Discover how the right daily
+              structure isn't a restriction, but the essential framework that
+              frees your creativity and focus from decision fatigue.
+            </p>
+            <span class="read-time">3 min read</span>
+          </a>
+
+          <a href="the-permission-to-be-unproductive.html" class="article-card">
+            <h4>The Permission to Be Unproductive</h4>
+            <p>
+              Feeling the pressure to always be productive? Discover why
+              granting yourself permission to be unproductive is the secret to
+              unlocking your most creative breakthroughs and profound clarity.
+            </p>
+            <span class="read-time">3 min read</span>
           </a>
 
           <a href="the-wisdom-of-a-beginners-mind.html" class="article-card">
-            <h4>The Wisdom of a Beginner's Mind</h4>
+            <h4>The Permission to Be Unproductive</h4>
             <p>
-              Expertise, while valuable, can blind us to new possibilities.
-              Explore the Zen concept of Shoshin...
+              Expertise, while valuable, can blind us to new possibilities..
             </p>
             <span class="read-time">4 min read</span>
           </a>
 
-          <a href="the-power-of-negative-Space.html" class="article-card">
-            <h4>The Power of Negative Space</h4>
+          <a href="the-slow-art-of-deep-attention.html" class="article-card">
+            <h4>The Slow Art of Deep Attention</h4>
             <p>
-              In art, composition is everything. But what often goes
-              unappreciated is the role of negative space...
+              We live in an economy of attention, and ours is a currency
+              constantly under assault. Notifications, endless feeds,
+              multi-tasking, we have been trained to skim the surface of the
+              world, mistaking a high-speed tour for genuine exploration.
             </p>
-            <span class="read-time">5 min read</span>
+            <span class="read-time">4 min read</span>
           </a>
-
-          <a href="the-unlikely-connections.html" class="article-card">
-            <h4>The Unlikely Connections</h4>
-            <p>
-              We are taught to specialize, to dive deep into a single silo of
-              knowledge...
-            </p>
-            <span class="read-time">3 min read</span>
-          </a>
+          <!-- Repeat for 3-5 more recent articles -->
         </div>
-      </section>
-
-      <!-- Personal Growth Category -->
-      <section id="growth" class="articles-category">
-        <h3 class="section-title">Personal Growth</h3>
-        <p class="category-description">
-          Reflections on identity, change, and living intentionally
-        </p>
-
-        <div class="articles-grid">
-          <a href="the-stories-we-wear.html" class="article-card">
-            <h4>The Stories We Wear</h4>
-            <p>
-              Our identity as something fluid and active: a collection of
-              stories we tell ourselves...
-            </p>
-            <span class="read-time">4 min read</span>
-          </a>
-
-          <a href="the-courage-of-a-changed-mind.html" class="article-card">
-            <h4>The Courage of a Changed Mind</h4>
-            <p>
-              We are raised to value consistency. Changing your mind is often
-              portrayed as a sign of weakness...
-            </p>
-            <span class="read-time">3 min read</span>
-          </a>
-
-          <a href="the-grace-of-a-good-end.html" class="article-card">
-            <h4>The Grace of a Good End</h4>
-            <p>
-              Our culture is infatuated with beginnings. But we are remarkably
-              illiterate when it comes to endings.
-            </p>
-            <span class="read-time">5 min read</span>
-          </a>
-
-          <a href="the-intelligence-of-your-hands.html" class="article-card">
-            <h4>The Intelligence of Your Hands</h4>
-            <p>
-              We have come to equate intelligence with what happens between our
-              ears...
-            </p>
-            <span class="read-time">4 min read</span>
-          </a>
-
-          <a href="the-beauty-of-a-wobble.html" class="article-card">
-            <h4>The Beauty of a Wobble</h4>
-            <p>
-              We are sold a vision of balance as a static, perfect state of
-              equilibrium...
-            </p>
-            <span class="read-time">4 min read</span>
-          </a>
+        <div class="view-all-container">
+          <a href="blog.html" class="view-all-btn">View All Articles →</a>
         </div>
       </section>
     </main>

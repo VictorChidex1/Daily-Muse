@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Personal Growth | The Daily Muse</title>
+    <meta
+      name="description"
+      content="Explore articles on personal development, identity, change, and living intentionally."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&family=Playfair+Display:wght@600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css" />
+    <link rel="icon" type="image/x-icon" href="Daily Muse.png" />
+  </head>
+  <body>
+    <button class="dark-mode-toggle" aria-label="Toggle dark mode">
+      <span class="toggle-icon">🌙</span>
+    </button>
+
+    <header class="main-header">
+      <div class="header-content">
+        <a href="index.html" style="text-decoration: none; color: inherit">
+          <h1 class="blog-title">The Daily Muse</h1>
+          <p class="blog-tagline">A Blog for the Curious Mind</p>
+        </a>
+      </div>
+
+      <div class="search-container">
+        <input
+          type="text"
+          id="search-input"
+          placeholder="Search articles..."
+          class="search-input"
+        />
+        <button id="search-button" class="search-button" aria-label="Search">
+          <span class="search-icon">🔍</span>
+        </button>
+        <div id="search-results" class="search-results"></div>
+      </div>
+
+      <nav class="main-nav">
+        <a href="index.html" class="nav-link">Home</a>
+        <a href="blog.html" class="nav-link">Blog</a>
+        <a href="about.html" class="nav-link">About</a>
+        <a href="contact.html" class="nav-link">Contact</a>
+      </nav>
+    </header>
+
+    <main class="main-content">
+      <section class="category-header">
+        <div class="category-icon-large">🌱</div>
+        <h2 class="section-title">Personal Growth</h2>
+        <p class="category-description">
+          Reflections on identity, change, and living intentionally. Discover
+          insights on self-discovery, courage, and the journey of becoming.
+        </p>
+      </section>
+
+      <div class="articles-grid">
+        <a href="the-stories-we-wear.html" class="article-card">
+          <div class="post-image">
+            <img
+              src="images/Blog 9.png"
+              alt="Personal identity and self-expression"
+            />
+          </div>
+          <h4>The Stories We Wear</h4>
+          <p>
+            We often think of our identity as a fixed, internal essence—a core
+            self. But I've come to understand it as something more fluid and
+            active: a collection of stories we tell ourselves...
+          </p>
+          <span class="read-time">4 min read</span>
+        </a>
+
+        <a href="the-courage-of-a-changed-mind.html" class="article-card">
+          <div class="post-image">
+            <img src="images/Blog 12.png" alt="Mind changing and growth" />
+          </div>
+          <h4>The Courage of a Changed Mind</h4>
+          <p>
+            We are raised to value consistency. We are told to "stand our
+            ground," to "stick to our principles." In the public sphere,
+            changing your mind is often portrayed as a "flip-flop"...
+          </p>
+          <span class="read-time">3 min read</span>
+        </a>
+
+        <a href="the-grace-of-a-good-end.html" class="article-card">
+          <div class="post-image">
+            <img
+              src="images/Blog 10.png"
+              alt="Beautiful conclusion and endings"
+            />
+          </div>
+          <h4>The Grace of a Good End</h4>
+          <p>
+            Our culture is infatuated with beginnings. We celebrate the new
+            year, the new job, the new project, the clean slate. We have endless
+            advice on how to start strong...
+          </p>
+          <span class="read-time">5 min read</span>
+        </a>
+
+        <a href="the-intelligence-of-your-hands.html" class="article-card">
+          <div class="post-image">
+            <img src="images/Blog 11.png" alt="Hands creating or crafting" />
+          </div>
+          <h4>The Intelligence of Your Hands</h4>
+          <p>
+            We have come to equate intelligence with what happens between our
+            ears—the speed of our processing, the breadth of our recall. We live
+            increasingly in our heads...
+          </p>
+          <span class="read-time">4 min read</span>
+        </a>
+      </div>
+
+      <div class="view-all-container">
+        <a href="index.html" class="view-all-btn">← Back to All Categories</a>
+      </div>
+    </main>
+
+    <footer class="main-footer">
+      <div class="footer-content">
+        <div class="footer-copyright">
+          <p>&copy; DailyMuse 2025</p>
+        </div>
+        <nav class="footer-nav">
+          <a href="legal-notice.html" class="footer-link">Legal Notice</a>
+          <a href="data-protection.html" class="footer-link">Data Protection</a>
+          <a href="privacy.html" class="footer-link">Privacy</a>
+          <a href="terms-conditions.html" class="footer-link"
+            >Terms and Conditions</a
+          >
+          <a href="site-policy.html" class="footer-link">Site Policy</a>
+        </nav>
+      </div>
+    </footer>
+
+    <script src="script.js"></script>
+  </body>
+</html>

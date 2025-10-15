@@ -13,7 +13,6 @@ class PageTransitions {
 
   setupLinkInterception() {
     this.links.forEach((link) => {
-      // Skip external links, mailto, tel, etc.
       if (this.shouldInterceptLink(link)) {
         link.addEventListener("click", (e) => {
           this.handleLinkClick(e, link);
@@ -41,7 +40,6 @@ class PageTransitions {
 
     this.showLoading();
 
-    // Small delay to show loading animation
     setTimeout(() => {
       window.location.href = href;
     }, 300);
@@ -62,19 +60,17 @@ class PageTransitions {
   }
 
   setupPerformanceMonitoring() {
-    // Hide loading spinner when page is fully loaded
     window.addEventListener("load", () => {
       this.hideLoading();
     });
 
-    // Also hide if DOM content is loaded (fallback)
     document.addEventListener("DOMContentLoaded", () => {
       setTimeout(() => this.hideLoading(), 500);
     });
   }
 }
 
-// Enhanced Dark Mode Toggle
+// ADVANCED DARK MODE WITH SYSTEM SYNC
 class DarkModeManager {
   constructor() {
     this.darkModeToggle = document.querySelector(".dark-mode-toggle");
@@ -85,9 +81,7 @@ class DarkModeManager {
   init() {
     if (!this.darkModeToggle || !this.toggleIcon) return;
 
-    // Make sure the toggle is visible
     this.darkModeToggle.style.display = "block";
-
     this.initializeDarkMode();
     this.setupEventListeners();
   }
@@ -95,16 +89,22 @@ class DarkModeManager {
   initializeDarkMode() {
     try {
       const savedMode = localStorage.getItem("darkMode");
-      const systemPrefersDark =
-        window.matchMedia &&
-        window.matchMedia("(prefers-color-scheme: dark)").matches;
+      const systemPrefersDark = window.matchMedia(
+        "(prefers-color-scheme: dark)"
+      ).matches;
 
-      const shouldEnableDarkMode =
-        savedMode === "enabled" || (!savedMode && systemPrefersDark);
-
-      if (shouldEnableDarkMode) {
-        document.body.classList.add("dark-mode");
-        this.toggleIcon.textContent = "☀️";
+      // If user has explicitly set a preference, use that
+      if (savedMode === "enabled") {
+        this.enableDarkMode();
+      } else if (savedMode === "disabled") {
+        this.disableDarkMode();
+      } else {
+        // If no preference saved, follow system preference
+        if (systemPrefersDark) {
+          this.enableDarkMode();
+        } else {
+          this.disableDarkMode();
+        }
       }
     } catch (error) {
       console.warn("Dark mode initialization failed:", error);
@@ -116,31 +116,50 @@ class DarkModeManager {
       this.toggleDarkMode();
     });
 
-    // System preference listener
+    // Listen for system preference changes
     if (window.matchMedia) {
       window
         .matchMedia("(prefers-color-scheme: dark)")
         .addEventListener("change", (e) => {
+          // Only auto-switch if user hasn't set a manual preference
           if (!localStorage.getItem("darkMode")) {
-            this.toggleDarkMode(e.matches);
+            if (e.matches) {
+              this.enableDarkMode(false); // false = don't save to localStorage
+            } else {
+              this.disableDarkMode(false);
+            }
           }
         });
     }
   }
 
-  toggleDarkMode(forceState = null) {
+  toggleDarkMode() {
     const isDarkMode =
-      forceState !== null
-        ? forceState
-        : document.body.classList.contains("dark-mode");
+      document.documentElement.getAttribute("data-theme") === "dark";
 
-    if (!isDarkMode) {
-      document.body.classList.add("dark-mode");
-      this.toggleIcon.textContent = "☀️";
-      localStorage.setItem("darkMode", "enabled");
+    if (isDarkMode) {
+      this.disableDarkMode();
     } else {
-      document.body.classList.remove("dark-mode");
-      this.toggleIcon.textContent = "🌙";
+      this.enableDarkMode();
+    }
+  }
+
+  enableDarkMode(savePreference = true) {
+    document.documentElement.setAttribute("data-theme", "dark");
+    document.body.classList.add("dark-mode");
+    this.toggleIcon.textContent = "☀️";
+
+    if (savePreference) {
+      localStorage.setItem("darkMode", "enabled");
+    }
+  }
+
+  disableDarkMode(savePreference = true) {
+    document.documentElement.setAttribute("data-theme", "light");
+    document.body.classList.remove("dark-mode");
+    this.toggleIcon.textContent = "🌙";
+
+    if (savePreference) {
       localStorage.setItem("darkMode", "disabled");
     }
   }
@@ -157,7 +176,6 @@ class MobileNavigation {
   init() {
     if (!this.menuToggle || !this.mainNav) return;
 
-    // Create hamburger menu toggle if it doesn't exist
     if (!this.menuToggle.innerHTML) {
       this.menuToggle.innerHTML = "☰";
       this.menuToggle.setAttribute("aria-label", "Toggle navigation menu");
@@ -171,14 +189,12 @@ class MobileNavigation {
       this.toggleMenu();
     });
 
-    // Close menu when clicking on a link
     this.mainNav.addEventListener("click", (e) => {
       if (e.target.tagName === "A") {
         this.closeMenu();
       }
     });
 
-    // Close menu when clicking outside
     document.addEventListener("click", (e) => {
       if (
         !this.mainNav.contains(e.target) &&
@@ -223,8 +239,6 @@ class BlogSearch {
 
   async loadArticles() {
     try {
-      // For demo purposes, we'll create sample article data
-      // In a real implementation, you might fetch this from an API or JSON file
       this.articles = [
         {
           title: "The Art of Asking Questions",
@@ -250,7 +264,6 @@ class BlogSearch {
           date: "2025-10-12",
           category: "Personal Growth",
         },
-        // Add more articles as needed
       ];
     } catch (error) {
       console.error("Error loading articles:", error);
@@ -272,7 +285,6 @@ class BlogSearch {
       }
     });
 
-    // Close results when clicking outside
     document.addEventListener("click", (e) => {
       if (!this.searchContainer.contains(e.target)) {
         this.hideResults();
@@ -382,7 +394,6 @@ class CommentsSection {
     this.displayComment(comment);
     e.target.reset();
 
-    // Show success message
     this.showMessage(
       "Thank you for your comment! It will be visible after moderation.",
       "success"
@@ -464,7 +475,6 @@ class ScrollAnimations {
   }
 
   setupScrollAnimations() {
-    // Add intersection observer for fade-in animations
     if ("IntersectionObserver" in window) {
       const observer = new IntersectionObserver(
         (entries) => {
@@ -480,7 +490,6 @@ class ScrollAnimations {
         }
       );
 
-      // Observe elements with animation classes
       document
         .querySelectorAll(".blog-post, .category-card, .article-card")
         .forEach((el) => {
@@ -495,7 +504,6 @@ class ScrollAnimations {
 
 // Initialize everything when DOM is ready
 document.addEventListener("DOMContentLoaded", function () {
-  // Initialize all components
   new PageTransitions();
   new DarkModeManager();
   new MobileNavigation();
@@ -503,7 +511,6 @@ document.addEventListener("DOMContentLoaded", function () {
   new CommentsSection();
   new ScrollAnimations();
 
-  // Add smooth entrance animation to main content
   const mainContent = document.querySelector(".main-content");
   if (mainContent) {
     mainContent.style.opacity = "0";
@@ -516,12 +523,10 @@ document.addEventListener("DOMContentLoaded", function () {
     }, 100);
   }
 
-  // Add loading state to buttons
   document
     .querySelectorAll("button, .read-more, .view-all-btn")
     .forEach((button) => {
       button.addEventListener("click", function (e) {
-        // Add ripple effect
         const ripple = document.createElement("span");
         const rect = this.getBoundingClientRect();
         const size = Math.max(rect.width, rect.height);
@@ -552,7 +557,7 @@ window.addEventListener("pageshow", function (event) {
   }
 });
 
-// Add some basic error handling
+// Error handling
 window.addEventListener("error", function (e) {
   console.error("Script error:", e.error);
 });

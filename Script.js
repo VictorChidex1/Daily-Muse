@@ -49,7 +49,7 @@ class PageTransitions {
 
   showLoading() {
     if (this.loadingSpinner) {
-      this.loadingSpinner.style.display = "block";
+      this.loadingSpinner.style.display = "flex";
       document.body.style.overflow = "hidden";
     }
   }
@@ -74,7 +74,7 @@ class PageTransitions {
   }
 }
 
-// Enhanced Dark Mode Toggle (your existing code, optimized)
+// Enhanced Dark Mode Toggle
 class DarkModeManager {
   constructor() {
     this.darkModeToggle = document.querySelector(".dark-mode-toggle");
@@ -84,6 +84,9 @@ class DarkModeManager {
 
   init() {
     if (!this.darkModeToggle || !this.toggleIcon) return;
+
+    // Make sure the toggle is visible
+    this.darkModeToggle.style.display = "block";
 
     this.initializeDarkMode();
     this.setupEventListeners();
@@ -143,7 +146,63 @@ class DarkModeManager {
   }
 }
 
-// Your existing BlogSearch class (keep it exactly as is)
+// Mobile Navigation Manager
+class MobileNavigation {
+  constructor() {
+    this.menuToggle = document.querySelector(".menu-toggle");
+    this.mainNav = document.querySelector(".main-nav");
+    this.init();
+  }
+
+  init() {
+    if (!this.menuToggle || !this.mainNav) return;
+
+    // Create hamburger menu toggle if it doesn't exist
+    if (!this.menuToggle.innerHTML) {
+      this.menuToggle.innerHTML = "☰";
+      this.menuToggle.setAttribute("aria-label", "Toggle navigation menu");
+    }
+
+    this.setupEventListeners();
+  }
+
+  setupEventListeners() {
+    this.menuToggle.addEventListener("click", () => {
+      this.toggleMenu();
+    });
+
+    // Close menu when clicking on a link
+    this.mainNav.addEventListener("click", (e) => {
+      if (e.target.tagName === "A") {
+        this.closeMenu();
+      }
+    });
+
+    // Close menu when clicking outside
+    document.addEventListener("click", (e) => {
+      if (
+        !this.mainNav.contains(e.target) &&
+        !this.menuToggle.contains(e.target)
+      ) {
+        this.closeMenu();
+      }
+    });
+  }
+
+  toggleMenu() {
+    this.mainNav.classList.toggle("active");
+    this.menuToggle.textContent = this.mainNav.classList.contains("active")
+      ? "✕"
+      : "☰";
+  }
+
+  closeMenu() {
+    this.mainNav.classList.remove("active");
+    this.menuToggle.textContent = "☰";
+  }
+}
+
+// Blog Search Functionality
 class BlogSearch {
   constructor() {
     this.searchInput = document.getElementById("search-input");
@@ -157,56 +216,292 @@ class BlogSearch {
     }
   }
 
-  // ... (keep all your existing BlogSearch methods exactly as they are)
   async init() {
     await this.loadArticles();
     this.setupEventListeners();
   }
 
   async loadArticles() {
-    // ... your existing loadArticles method
+    try {
+      // For demo purposes, we'll create sample article data
+      // In a real implementation, you might fetch this from an API or JSON file
+      this.articles = [
+        {
+          title: "The Art of Asking Questions",
+          excerpt:
+            "It occurred to me the other day that we spend most of our early lives being taught how to answer questions, and almost no time learning how to ask them...",
+          url: "the-art-of-asking-questions.html",
+          date: "2025-10-10",
+          category: "Philosophy & Thinking",
+        },
+        {
+          title: "Finding Silence in a Noisy World",
+          excerpt:
+            "Silence is not the absence of sound. It's the presence of a different kind of clarity...",
+          url: "finding-silence-in-a-noisy-world.html",
+          date: "2025-10-14",
+          category: "Mindfulness & Attention",
+        },
+        {
+          title: "The Unseen Architecture of Routine",
+          excerpt:
+            "We often think of routine as the enemy of spontaneity, the dull cousin of creativity...",
+          url: "the-unseen-architecture-of-routine.html",
+          date: "2025-10-12",
+          category: "Personal Growth",
+        },
+        // Add more articles as needed
+      ];
+    } catch (error) {
+      console.error("Error loading articles:", error);
+    }
   }
 
   setupEventListeners() {
-    // ... your existing setupEventListeners method
+    this.searchInput.addEventListener("input", (e) => {
+      this.handleSearch(e.target.value);
+    });
+
+    this.searchButton.addEventListener("click", () => {
+      this.handleSearch(this.searchInput.value);
+    });
+
+    this.searchInput.addEventListener("keypress", (e) => {
+      if (e.key === "Enter") {
+        this.handleSearch(this.searchInput.value);
+      }
+    });
+
+    // Close results when clicking outside
+    document.addEventListener("click", (e) => {
+      if (!this.searchContainer.contains(e.target)) {
+        this.hideResults();
+      }
+    });
   }
 
   handleSearch(query) {
-    // ... your existing handleSearch method
+    if (query.trim().length === 0) {
+      this.hideResults();
+      return;
+    }
+
+    if (query.length < 2) {
+      return;
+    }
+
+    const results = this.searchArticles(query);
+    this.displayResults(results);
   }
 
   searchArticles(query) {
-    // ... your existing searchArticles method
+    const searchTerm = query.toLowerCase();
+    return this.articles.filter(
+      (article) =>
+        article.title.toLowerCase().includes(searchTerm) ||
+        article.excerpt.toLowerCase().includes(searchTerm) ||
+        article.category.toLowerCase().includes(searchTerm)
+    );
   }
 
   displayResults(results) {
-    // ... your existing displayResults method
+    if (results.length === 0) {
+      this.searchResults.innerHTML =
+        '<div class="no-results">No articles found matching your search.</div>';
+      this.searchResults.style.display = "block";
+      return;
+    }
+
+    this.searchResults.innerHTML = results
+      .map(
+        (article) => `
+      <div class="search-result-item">
+        <a href="${article.url}" class="search-result-link">
+          <h4>${article.title}</h4>
+          <p>${article.excerpt}</p>
+          <div class="search-result-meta">
+            <span class="search-result-category">${article.category}</span>
+            <span class="search-result-date">${this.formatDate(
+              article.date
+            )}</span>
+          </div>
+        </a>
+      </div>
+    `
+      )
+      .join("");
+
+    this.searchResults.style.display = "block";
+  }
+
+  hideResults() {
+    this.searchResults.style.display = "none";
   }
 
   formatDate(dateString) {
-    // ... your existing formatDate method
-  }
-
-  performSearch(query) {
-    // ... your existing performSearch method
+    const options = { year: "numeric", month: "long", day: "numeric" };
+    return new Date(dateString).toLocaleDateString(undefined, options);
   }
 }
 
-// Your existing CommentsSection class (keep it exactly as is)
+// Comments Section Management
 class CommentsSection {
   constructor() {
-    // ... your existing constructor
+    this.commentsContainer = document.querySelector(".comments-section");
+    if (this.commentsContainer) {
+      this.init();
+    }
   }
 
-  // ... (keep all your existing CommentsSection methods exactly as they are)
+  init() {
+    this.setupEventListeners();
+    this.loadComments();
+  }
+
+  setupEventListeners() {
+    const commentForm = document.getElementById("comment-form");
+    if (commentForm) {
+      commentForm.addEventListener("submit", (e) => {
+        e.preventDefault();
+        this.handleCommentSubmit(e);
+      });
+    }
+  }
+
+  handleCommentSubmit(e) {
+    const formData = new FormData(e.target);
+    const comment = {
+      name: formData.get("name"),
+      email: formData.get("email"),
+      comment: formData.get("comment"),
+      date: new Date().toISOString(),
+      id: Date.now(),
+    };
+
+    this.saveComment(comment);
+    this.displayComment(comment);
+    e.target.reset();
+
+    // Show success message
+    this.showMessage(
+      "Thank you for your comment! It will be visible after moderation.",
+      "success"
+    );
+  }
+
+  saveComment(comment) {
+    let comments = JSON.parse(localStorage.getItem("blog-comments") || "[]");
+    comments.push(comment);
+    localStorage.setItem("blog-comments", JSON.stringify(comments));
+  }
+
+  loadComments() {
+    const comments = JSON.parse(localStorage.getItem("blog-comments") || "[]");
+    comments.forEach((comment) => this.displayComment(comment));
+  }
+
+  displayComment(comment) {
+    const commentElement = document.createElement("div");
+    commentElement.className = "comment";
+    commentElement.innerHTML = `
+      <div class="comment-header">
+        <strong>${comment.name}</strong>
+        <span class="comment-date">${this.formatDate(comment.date)}</span>
+      </div>
+      <div class="comment-content">${comment.comment}</div>
+    `;
+
+    const commentsList = document.querySelector(".comments-list");
+    if (commentsList) {
+      commentsList.appendChild(commentElement);
+    }
+  }
+
+  formatDate(dateString) {
+    return new Date(dateString).toLocaleDateString();
+  }
+
+  showMessage(message, type) {
+    const messageDiv = document.createElement("div");
+    messageDiv.className = `message ${type}`;
+    messageDiv.textContent = message;
+
+    const commentForm = document.getElementById("comment-form");
+    if (commentForm) {
+      commentForm.parentNode.insertBefore(messageDiv, commentForm);
+
+      setTimeout(() => {
+        messageDiv.remove();
+      }, 5000);
+    }
+  }
+}
+
+// Smooth Scrolling and Animations
+class ScrollAnimations {
+  constructor() {
+    this.init();
+  }
+
+  init() {
+    this.setupSmoothScrolling();
+    this.setupScrollAnimations();
+  }
+
+  setupSmoothScrolling() {
+    document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+      anchor.addEventListener("click", function (e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute("href"));
+        if (target) {
+          target.scrollIntoView({
+            behavior: "smooth",
+            block: "start",
+          });
+        }
+      });
+    });
+  }
+
+  setupScrollAnimations() {
+    // Add intersection observer for fade-in animations
+    if ("IntersectionObserver" in window) {
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.style.opacity = "1";
+              entry.target.style.transform = "translateY(0)";
+            }
+          });
+        },
+        {
+          threshold: 0.1,
+        }
+      );
+
+      // Observe elements with animation classes
+      document
+        .querySelectorAll(".blog-post, .category-card, .article-card")
+        .forEach((el) => {
+          el.style.opacity = "0";
+          el.style.transform = "translateY(20px)";
+          el.style.transition = "opacity 0.6s ease, transform 0.6s ease";
+          observer.observe(el);
+        });
+    }
+  }
 }
 
 // Initialize everything when DOM is ready
 document.addEventListener("DOMContentLoaded", function () {
+  // Initialize all components
   new PageTransitions();
   new DarkModeManager();
+  new MobileNavigation();
   new BlogSearch();
   new CommentsSection();
+  new ScrollAnimations();
 
   // Add smooth entrance animation to main content
   const mainContent = document.querySelector(".main-content");
@@ -220,6 +515,31 @@ document.addEventListener("DOMContentLoaded", function () {
       mainContent.style.transform = "translateY(0)";
     }, 100);
   }
+
+  // Add loading state to buttons
+  document
+    .querySelectorAll("button, .read-more, .view-all-btn")
+    .forEach((button) => {
+      button.addEventListener("click", function (e) {
+        // Add ripple effect
+        const ripple = document.createElement("span");
+        const rect = this.getBoundingClientRect();
+        const size = Math.max(rect.width, rect.height);
+        const x = e.clientX - rect.left - size / 2;
+        const y = e.clientY - rect.top - size / 2;
+
+        ripple.style.width = ripple.style.height = size + "px";
+        ripple.style.left = x + "px";
+        ripple.style.top = y + "px";
+        ripple.classList.add("ripple");
+
+        this.appendChild(ripple);
+
+        setTimeout(() => {
+          ripple.remove();
+        }, 600);
+      });
+    });
 });
 
 // Handle browser back/forward navigation
@@ -232,19 +552,131 @@ window.addEventListener("pageshow", function (event) {
   }
 });
 
-document.addEventListener("DOMContentLoaded", () => {
-  const menuToggle = document.querySelector(".menu-toggle");
-  const mainNav = document.querySelector(".main-nav");
-
-  if (menuToggle && mainNav) {
-    menuToggle.addEventListener("click", () => {
-      // Toggle the 'active' class on the navigation
-      mainNav.classList.toggle("active");
-
-      // Accessibility: Update the button's aria-expanded state
-      const isExpanded =
-        menuToggle.getAttribute("aria-expanded") === "true" || false;
-      menuToggle.setAttribute("aria-expanded", !isExpanded);
-    });
-  }
+// Add some basic error handling
+window.addEventListener("error", function (e) {
+  console.error("Script error:", e.error);
 });
+
+// Add CSS for search results and ripple effect
+const additionalStyles = `
+  .search-results {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: var(--secondary-bg);
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow-hover);
+    max-height: 400px;
+    overflow-y: auto;
+    z-index: 1000;
+    margin-top: 0.5rem;
+  }
+  
+  body.dark-mode .search-results {
+    background: var(--dark-bg-secondary);
+    border: 1px solid var(--dark-border);
+  }
+  
+  .search-result-item {
+    border-bottom: 1px solid var(--border-color);
+  }
+  
+  body.dark-mode .search-result-item {
+    border-bottom: 1px solid var(--dark-border);
+  }
+  
+  .search-result-item:last-child {
+    border-bottom: none;
+  }
+  
+  .search-result-link {
+    display: block;
+    padding: 1rem;
+    color: var(--text-primary);
+    transition: background-color var(--transition);
+  }
+  
+  body.dark-mode .search-result-link {
+    color: var(--dark-text-primary);
+  }
+  
+  .search-result-link:hover {
+    background-color: var(--border-color);
+    color: var(--text-accent);
+  }
+  
+  body.dark-mode .search-result-link:hover {
+    background-color: var(--dark-border);
+  }
+  
+  .search-result-link h4 {
+    margin-bottom: 0.5rem;
+    font-size: 1.1rem;
+  }
+  
+  .search-result-link p {
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+    margin-bottom: 0.5rem;
+  }
+  
+  body.dark-mode .search-result-link p {
+    color: var(--dark-text-secondary);
+  }
+  
+  .search-result-meta {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.8rem;
+    color: var(--text-light);
+  }
+  
+  .no-results {
+    padding: 1rem;
+    text-align: center;
+    color: var(--text-light);
+  }
+  
+  .ripple {
+    position: absolute;
+    border-radius: 50%;
+    background-color: rgba(255, 255, 255, 0.7);
+    transform: scale(0);
+    animation: ripple-animation 0.6s linear;
+    pointer-events: none;
+  }
+  
+  @keyframes ripple-animation {
+    to {
+      transform: scale(4);
+      opacity: 0;
+    }
+  }
+  
+  .message {
+    padding: 1rem;
+    margin: 1rem 0;
+    border-radius: var(--border-radius);
+    text-align: center;
+  }
+  
+  .message.success {
+    background-color: #d4edda;
+    color: #155724;
+    border: 1px solid #c3e6cb;
+  }
+  
+  body.dark-mode .message.success {
+    background-color: #0f5132;
+    color: #d1e7dd;
+    border: 1px solid #0c4128;
+  }
+`;
+
+// Inject additional styles
+const styleSheet = document.createElement("style");
+styleSheet.textContent = additionalStyles;
+document.head.appendChild(styleSheet);

@@ -222,12 +222,11 @@ body.dark-mode .dark-mode-toggle {
 .main-nav {
   display: flex;
   justify-content: flex-end;
-  gap: 1rem; /* TWEAK 1: Reduced the space between links from 1.5rem to 1rem to ensure they fit. */
-  flex-wrap: nowrap; /* TWEAK 2: Forces all navigation items onto a single line, preventing wrap. */
+  gap: 1.5rem;
+  flex-wrap: wrap;
   flex: 0 0 auto;
   position: relative;
   z-index: 999;
-  align-items: center; /* TWEAK 3: Ensures perfect vertical alignment for all items, including the 'Categories' dropdown. */
 }
 
 .nav-link {
@@ -1637,10 +1636,6 @@ body.dark-mode .faq-question:hover {
     gap: 1rem;
   }
 
-  .menu-toggle {
-    display: block; /* Show the button on mobile */
-  }
-
   .header-content {
     text-align: center;
     width: 100%;
@@ -1675,31 +1670,11 @@ body.dark-mode .faq-question:hover {
   }
 
   .main-nav {
-    /* Hide the navigation bar completely */
-    display: none;
-    /* Style for when the menu is active */
-    flex-direction: column;
-    position: absolute;
-    top: 100%; /* Position right below the header */
-    left: 0;
+    order: 3;
+    justify-content: center;
     width: 100%;
-    background-color: var(--secondary-bg); /* Use a solid background */
-    border-top: 1px solid var(--border-color);
-    padding: 1rem 0;
-    box-shadow: var(--shadow);
-  }
-
-  /* Class to display the menu when the button is clicked (will be toggled by JS) */
-  .main-nav.active {
-    display: flex;
-  }
-
-  /* Ensure links are full-width and centered when in the mobile menu */
-  .main-nav a,
-  .main-nav .nav-dropdown {
-    width: 100%;
-    text-align: center;
-    padding: 0.5rem 0;
+    gap: 1rem;
+    padding-right: 60px;
   }
 
   .nav-link {

@@ -1637,6 +1637,10 @@ body.dark-mode .faq-question:hover {
     gap: 1rem;
   }
 
+  .menu-toggle {
+    display: block; /* Show the button on mobile */
+  }
+
   .header-content {
     text-align: center;
     width: 100%;
@@ -1671,11 +1675,31 @@ body.dark-mode .faq-question:hover {
   }
 
   .main-nav {
-    order: 3;
-    justify-content: center;
+    /* Hide the navigation bar completely */
+    display: none;
+    /* Style for when the menu is active */
+    flex-direction: column;
+    position: absolute;
+    top: 100%; /* Position right below the header */
+    left: 0;
     width: 100%;
-    gap: 1rem;
-    padding-right: 60px;
+    background-color: var(--secondary-bg); /* Use a solid background */
+    border-top: 1px solid var(--border-color);
+    padding: 1rem 0;
+    box-shadow: var(--shadow);
+  }
+
+  /* Class to display the menu when the button is clicked (will be toggled by JS) */
+  .main-nav.active {
+    display: flex;
+  }
+
+  /* Ensure links are full-width and centered when in the mobile menu */
+  .main-nav a,
+  .main-nav .nav-dropdown {
+    width: 100%;
+    text-align: center;
+    padding: 0.5rem 0;
   }
 
   .nav-link {

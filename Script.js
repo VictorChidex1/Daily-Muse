@@ -231,3 +231,20 @@ window.addEventListener("pageshow", function (event) {
     }
   }
 });
+
+document.addEventListener("DOMContentLoaded", () => {
+  const menuToggle = document.querySelector(".menu-toggle");
+  const mainNav = document.querySelector(".main-nav");
+
+  if (menuToggle && mainNav) {
+    menuToggle.addEventListener("click", () => {
+      // Toggle the 'active' class on the navigation
+      mainNav.classList.toggle("active");
+
+      // Accessibility: Update the button's aria-expanded state
+      const isExpanded =
+        menuToggle.getAttribute("aria-expanded") === "true" || false;
+      menuToggle.setAttribute("aria-expanded", !isExpanded);
+    });
+  }
+});

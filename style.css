@@ -1636,8 +1636,9 @@ body.dark-mode .faq-question:hover {
     gap: 1rem;
   }
 
+  /* Ensure the header content has proper spacing */
   .header-content {
-    text-align: center;
+    margin-bottom: 10px;
     width: 100%;
   }
 
@@ -1650,11 +1651,11 @@ body.dark-mode .faq-question:hover {
     font-size: 1rem;
   }
 
+  /* Adjust search container for better mobile layout */
   .search-container {
-    order: 2;
+    margin: 10px 0;
     width: 100%;
     max-width: 100%;
-    margin: 0;
   }
 
   .search-input {
@@ -1670,20 +1671,63 @@ body.dark-mode .faq-question:hover {
   }
 
   .main-nav {
-    order: 3;
+    display: flex;
+    flex-wrap: wrap;
     justify-content: center;
+    gap: 8px;
+    margin-top: 15px;
     width: 100%;
-    gap: 1rem;
-    padding-right: 60px;
+    padding: 0 10px;
   }
 
   .nav-link {
-    padding: 0.6rem 1rem;
+    padding: 10px 14px;
     font-size: 0.9rem;
+    white-space: nowrap;
     min-height: 44px;
     display: flex;
     align-items: center;
     justify-content: center;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 6px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    flex: 1;
+    min-width: 120px;
+    max-width: 140px;
+  }
+
+  .nav-link:hover {
+    background: rgba(255, 255, 255, 0.15);
+    transform: translateY(-1px);
+  }
+
+  /* Fix dropdown for mobile */
+  .nav-dropdown {
+    width: 100%;
+    text-align: center;
+  }
+
+  .dropdown-content {
+    position: static;
+    display: none;
+    width: 100%;
+    box-shadow: none;
+    border: none;
+    background: transparent;
+    margin-top: 8px;
+  }
+
+  .nav-dropdown:hover .dropdown-content,
+  .nav-dropdown:focus-within .dropdown-content {
+    display: block;
+  }
+
+  .dropdown-content a {
+    padding: 12px 16px;
+    margin: 4px 0;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 6px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
   }
 
   /* Dark mode toggle adjustments */
@@ -1883,16 +1927,15 @@ body.dark-mode .faq-question:hover {
   }
 
   .main-nav {
-    flex-direction: row;
-    flex-wrap: wrap;
-    gap: 0.5rem;
-    padding-right: 55px;
+    gap: 6px;
+    padding: 0 5px;
   }
 
   .nav-link {
-    padding: 0.5rem 0.8rem;
+    padding: 8px 12px;
     font-size: 0.85rem;
-    min-height: 40px;
+    min-width: 110px;
+    max-width: 130px;
   }
 
   .search-input {
@@ -2002,13 +2045,13 @@ body.dark-mode .faq-question:hover {
 /* Extra small screens */
 @media (max-width: 360px) {
   .main-nav {
-    padding-right: 50px;
-    gap: 0.3rem;
+    flex-direction: column;
+    align-items: center;
   }
 
   .nav-link {
-    padding: 0.4rem 0.6rem;
-    font-size: 0.8rem;
+    max-width: 200px;
+    width: 100%;
   }
 
   .dark-mode-toggle {

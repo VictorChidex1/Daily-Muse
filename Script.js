@@ -502,6 +502,169 @@ class ScrollAnimations {
   }
 }
 
+// IMAGE OPTIMIZATION SYSTEM
+class ImageOptimizer {
+  constructor() {
+    this.breakpoints = [320, 640, 768, 1024, 1280, 1536];
+    this.init();
+  }
+
+  init() {
+    this.setupObservers();
+    this.processExistingImages();
+  }
+
+  setupObservers() {
+    // Intersection Observer for lazy loading
+    this.intersectionObserver = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            this.loadImage(entry.target);
+            this.intersectionObserver.unobserve(entry.target);
+          }
+        });
+      },
+      {
+        rootMargin: "50px 0px",
+        threshold: 0.1,
+      }
+    );
+  }
+
+  processExistingImages() {
+    // Process regular images with data-src
+    const lazyImages = document.querySelectorAll("img[data-src]");
+    lazyImages.forEach((img) => {
+      this.addBlurPlaceholder(img);
+      this.intersectionObserver.observe(img);
+    });
+
+    // Process post images specifically
+    const postImages = document.querySelectorAll(".post-image");
+    postImages.forEach((img) => {
+      if (!img.hasAttribute("data-src") && img.src) {
+        // Convert existing post images to lazy loading
+        img.setAttribute("data-src", img.src);
+        img.removeAttribute("src");
+        this.addBlurPlaceholder(img);
+        this.intersectionObserver.observe(img);
+      }
+    });
+  }
+
+  addBlurPlaceholder(img) {
+    const parent = img.parentElement;
+    if (!parent || parent.classList.contains("image-container")) return;
+
+    const container = document.createElement("div");
+    container.className = "image-container";
+    container.style.position = "relative";
+    container.style.overflow = "hidden";
+    container.style.borderRadius = "var(--border-radius)";
+
+    // Create blur placeholder
+    const placeholder = document.createElement("div");
+    placeholder.className = "image-placeholder";
+    placeholder.style.width = "100%";
+    placeholder.style.height = "100%";
+    placeholder.style.background = "var(--border-color)";
+    placeholder.style.filter = "blur(10px)";
+    placeholder.style.transition = "opacity 0.5s ease";
+
+    // Wrap image
+    parent.insertBefore(container, img);
+    container.appendChild(placeholder);
+    container.appendChild(img);
+
+    // Style the actual image
+    img.style.opacity = "0";
+    img.style.transition = "opacity 0.5s ease";
+    img.style.width = "100%";
+    img.style.height = "auto";
+  }
+
+  loadImage(img) {
+    const container = img.parentElement;
+    const placeholder = container?.querySelector(".image-placeholder");
+
+    const src = img.getAttribute("data-src");
+    if (!src) return;
+
+    // Check WebP support and use WebP if available
+    this.supportsWebP()
+      .then((supportsWebP) => {
+        const finalSrc = supportsWebP ? this.convertToWebP(src) : src;
+
+        const tempImg = new Image();
+        tempImg.onload = () => {
+          img.src = finalSrc;
+          img.style.opacity = "1";
+
+          if (placeholder) {
+            placeholder.style.opacity = "0";
+            setTimeout(() => {
+              placeholder.remove();
+            }, 500);
+          }
+        };
+
+        tempImg.onerror = () => {
+          // Fallback to original format if WebP fails
+          img.src = src;
+          img.style.opacity = "1";
+
+          if (placeholder) {
+            placeholder.style.opacity = "0";
+            setTimeout(() => {
+              placeholder.remove();
+            }, 500);
+          }
+        };
+
+        tempImg.src = finalSrc;
+      })
+      .catch(() => {
+        // If WebP check fails, use original source
+        img.src = src;
+        img.style.opacity = "1";
+
+        if (placeholder) {
+          placeholder.style.opacity = "0";
+          setTimeout(() => {
+            placeholder.remove();
+          }, 500);
+        }
+      });
+  }
+
+  convertToWebP(src) {
+    // Convert image path to WebP version
+    if (src.match(/\.(jpg|jpeg|png)$/i)) {
+      return src.replace(/\.(jpg|jpeg|png)$/i, ".webp");
+    }
+    return src;
+  }
+
+  supportsWebP() {
+    return new Promise((resolve) => {
+      const webP = new Image();
+      webP.onload = webP.onerror = () => {
+        resolve(webP.height === 2);
+      };
+      webP.src =
+        "data:image/webp;base64,UklGRjoAAABXRUJQVlA4IC4AAACyAgCdASoCAAIALmk0mk0iIiIiIgBoSygABc6WWgAA/veff/0PP8bA//LwYAAA";
+    });
+  }
+
+  // Utility method to optimize new images
+  optimizeImage(imgElement, src) {
+    imgElement.setAttribute("data-src", src);
+    this.addBlurPlaceholder(imgElement);
+    this.intersectionObserver.observe(imgElement);
+  }
+}
+
 // Initialize everything when DOM is ready
 document.addEventListener("DOMContentLoaded", function () {
   new PageTransitions();
@@ -510,6 +673,7 @@ document.addEventListener("DOMContentLoaded", function () {
   new BlogSearch();
   new CommentsSection();
   new ScrollAnimations();
+  new ImageOptimizer(); // NEW: Initialize Image Optimizer
 
   const mainContent = document.querySelector(".main-content");
   if (mainContent) {
@@ -562,7 +726,7 @@ window.addEventListener("error", function (e) {
   console.error("Script error:", e.error);
 });
 
-// Add CSS for search results and ripple effect
+// Add CSS for search results, ripple effect, AND image optimization
 const additionalStyles = `
   .search-results {
     display: none;
@@ -678,6 +842,68 @@ const additionalStyles = `
     background-color: #0f5132;
     color: #d1e7dd;
     border: 1px solid #0c4128;
+  }
+
+  /* IMAGE OPTIMIZATION STYLES */
+  .image-container {
+    position: relative;
+    overflow: hidden;
+    border-radius: var(--border-radius);
+    background: var(--border-color);
+  }
+
+  .image-placeholder {
+    width: 100%;
+    height: 100%;
+    background: var(--border-color);
+    filter: blur(10px);
+    transition: opacity 0.5s ease;
+    transform: scale(1.1);
+  }
+
+  .image-container img {
+    transition: opacity 0.5s ease;
+    width: 100%;
+    height: auto;
+  }
+
+  .post-image {
+    width: 50%;
+    height: auto;
+    margin: 0 auto 1.5rem auto;
+    display: block;
+  }
+
+  @media (max-width: 768px) {
+    .post-image {
+      width: 70%;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .post-image {
+      width: 85%;
+    }
+  }
+
+  @keyframes imageLoad {
+    0% { opacity: 0; transform: scale(1.02); }
+    100% { opacity: 1; transform: scale(1); }
+  }
+
+  .image-container.loaded img {
+    animation: imageLoad 0.6s ease-out;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .image-placeholder,
+    .image-container img {
+      transition: none;
+    }
+    
+    .image-container.loaded img {
+      animation: none;
+    }
   }
 `;
 

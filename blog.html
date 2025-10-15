@@ -40,11 +40,13 @@
     <!-- The Header - The Welcome Mat to Our Blog -->
     <header class="main-header">
       <div class="header-content">
-        <h1 class="blog-title">The Daily Muse</h1>
-        <p class="blog-tagline">A Blog for the Curious Mind</p>
+        <a href="index.html" style="text-decoration: none; color: inherit">
+          <h1 class="blog-title">The Daily Muse</h1>
+          <p class="blog-tagline">A Blog for the Curious Mind</p>
+        </a>
       </div>
 
-      <!-- ADD SEARCH BAR HERE -->
+      <!-- Search Bar -->
       <div class="search-container">
         <input
           type="text"
@@ -60,7 +62,16 @@
 
       <nav class="main-nav">
         <a href="index.html" class="nav-link">Home</a>
-        <!-- Now it points back! -->
+        <div class="nav-dropdown">
+          <a href="#" class="nav-link">Categories ▾</a>
+          <div class="dropdown-content">
+            <a href="category-mindfulness.html">🧠 Mindfulness & Attention</a>
+            <a href="category-creativity.html">🎨 Creativity & Process</a>
+            <a href="category-growth.html">🌱 Personal Growth</a>
+            <a href="category-philosophy.html">🔍 Philosophy & Thinking</a>
+            <a href="blog.html">📚 All Articles</a>
+          </div>
+        </div>
         <a href="about.html" class="nav-link">About</a>
         <a href="#" class="nav-link">Archives</a>
         <a href="contact.html" class="nav-link">Contact</a>

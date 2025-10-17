@@ -1,3 +1,38 @@
+// GitHub Pages Debugging
+console.log("GitHub Pages Debug - Script loaded successfully");
+console.log("Current URL:", window.location.href);
+
+// Immediate spinner removal
+if (document.getElementById("loading-spinner")) {
+  document.getElementById("loading-spinner").remove();
+  console.log("Removed loading spinner element");
+}
+document.body.style.overflow = "";
+
+// GitHub Pages specific fix
+if (window.location.hostname.includes("github.io")) {
+  console.log("GitHub Pages environment detected");
+
+  window.addEventListener("load", function () {
+    console.log("GitHub Pages - Window fully loaded");
+    const spinner = document.getElementById("loading-spinner");
+    if (spinner) {
+      console.log("GitHub Pages - Removing stubborn spinner");
+      spinner.remove();
+    }
+    document.body.style.overflow = "";
+  });
+
+  setTimeout(() => {
+    const spinner = document.getElementById("loading-spinner");
+    if (spinner) {
+      console.log("GitHub Pages - Emergency spinner removal");
+      spinner.remove();
+    }
+    document.body.style.overflow = "";
+  }, 3000);
+}
+
 // Smooth Page Transitions Manager (NO SPINNER)
 class PageTransitions {
   constructor() {
@@ -36,7 +71,6 @@ class PageTransitions {
     e.preventDefault();
     const href = link.getAttribute("href");
 
-    // No loading spinner - just navigate after a tiny delay for smoothness
     setTimeout(() => {
       window.location.href = href;
     }, 100);
@@ -532,9 +566,10 @@ class ImageOptimizer {
   }
 }
 
-// Clean initialization without any spinner logic
+// Clean initialization
 document.addEventListener("DOMContentLoaded", function () {
-  // Initialize all components
+  console.log("DOM Content Loaded - Starting initialization");
+
   new PageTransitions();
   new DarkModeManager();
   new MobileNavigation();
@@ -543,7 +578,6 @@ document.addEventListener("DOMContentLoaded", function () {
   new ScrollAnimations();
   new ImageOptimizer();
 
-  // Main content animation
   const mainContent = document.querySelector(".main-content");
   if (mainContent) {
     mainContent.style.opacity = "0";
@@ -556,7 +590,6 @@ document.addEventListener("DOMContentLoaded", function () {
     }, 100);
   }
 
-  // Ripple effect for buttons
   document
     .querySelectorAll("button, .read-more, .view-all-btn")
     .forEach((button) => {
@@ -579,15 +612,6 @@ document.addEventListener("DOMContentLoaded", function () {
         }, 600);
       });
     });
-});
-
-// Remove any existing loading spinner from the DOM on page load
-document.addEventListener("DOMContentLoaded", function () {
-  const loadingSpinner = document.getElementById("loading-spinner");
-  if (loadingSpinner) {
-    loadingSpinner.remove();
-  }
-  document.body.style.overflow = "";
 });
 
 // Global error handling

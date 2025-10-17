@@ -1787,3 +1787,27 @@ button:focus-visible,
     padding: 0;
   }
 }
+
+/* === Fix: make nav dropdown visible above header/search/etc ===
+   Minimal, targeted change — only affects dropdown stacking/overflow.
+*/
+.main-header,
+.main-nav,
+.nav-dropdown {
+  /* allow children to overflow header/nav instead of being clipped */
+  overflow: visible !important;
+}
+
+/* make sure dropdown sits above search results, dark toggle, etc. */
+.dropdown-content {
+  position: absolute; /* already set, but keep it explicit */
+  z-index: 9999 !important;
+  /* keep the existing placement rules */
+  top: 100%;
+  left: 0;
+}
+
+/* keep show-on-hover behaviour */
+.nav-dropdown:hover .dropdown-content {
+  display: block;
+}

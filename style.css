@@ -239,12 +239,12 @@ body.dark-mode .dark-mode-toggle {
 /* === MAIN NAVIGATION STYLES === */
 .main-nav {
   display: flex;
-  justify-content: flex-end;
-  gap: 1.5rem;
-  flex-wrap: wrap;
-  flex: 0 0 auto;
-  position: relative;
-  z-index: 999;
+  flex-wrap: nowrap; /* Prevent wrapping */
+  justify-content: center;
+  align-items: center;
+  gap: 2rem; /* Space between items */
+  white-space: nowrap; /* Prevent text wrapping */
+  overflow-x: auto; /* Allow horizontal scrolling if needed on mobile */
 }
 
 .nav-link {
@@ -1522,6 +1522,8 @@ body.dark-mode .comment-form-group textarea {
     justify-content: center;
     width: 100%;
     gap: 1rem;
+    gap: 1rem;
+    font-size: 0.9rem;
   }
 
   .dark-mode-toggle {

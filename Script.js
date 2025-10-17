@@ -1,14 +1,12 @@
-// Smooth Page Transitions Manager
+// Smooth Page Transitions Manager (NO SPINNER)
 class PageTransitions {
   constructor() {
-    this.loadingSpinner = document.getElementById("loading-spinner");
     this.links = document.querySelectorAll("a[href]");
     this.init();
   }
 
   init() {
     this.setupLinkInterception();
-    this.setupPerformanceMonitoring();
   }
 
   setupLinkInterception() {
@@ -38,35 +36,10 @@ class PageTransitions {
     e.preventDefault();
     const href = link.getAttribute("href");
 
-    this.showLoading();
-
+    // No loading spinner - just navigate after a tiny delay for smoothness
     setTimeout(() => {
       window.location.href = href;
-    }, 300);
-  }
-
-  showLoading() {
-    if (this.loadingSpinner) {
-      this.loadingSpinner.style.display = "flex";
-      document.body.style.overflow = "hidden";
-    }
-  }
-
-  hideLoading() {
-    if (this.loadingSpinner) {
-      this.loadingSpinner.style.display = "none";
-      document.body.style.overflow = "";
-    }
-  }
-
-  setupPerformanceMonitoring() {
-    window.addEventListener("load", () => {
-      this.hideLoading();
-    });
-
-    document.addEventListener("DOMContentLoaded", () => {
-      setTimeout(() => this.hideLoading(), 500);
-    });
+    }, 100);
   }
 }
 
@@ -93,13 +66,11 @@ class DarkModeManager {
         "(prefers-color-scheme: dark)"
       ).matches;
 
-      // If user has explicitly set a preference, use that
       if (savedMode === "enabled") {
         this.enableDarkMode();
       } else if (savedMode === "disabled") {
         this.disableDarkMode();
       } else {
-        // If no preference saved, follow system preference
         if (systemPrefersDark) {
           this.enableDarkMode();
         } else {
@@ -116,15 +87,13 @@ class DarkModeManager {
       this.toggleDarkMode();
     });
 
-    // Listen for system preference changes
     if (window.matchMedia) {
       window
         .matchMedia("(prefers-color-scheme: dark)")
         .addEventListener("change", (e) => {
-          // Only auto-switch if user hasn't set a manual preference
           if (!localStorage.getItem("darkMode")) {
             if (e.matches) {
-              this.enableDarkMode(false); // false = don't save to localStorage
+              this.enableDarkMode(false);
             } else {
               this.disableDarkMode(false);
             }
@@ -505,7 +474,6 @@ class ScrollAnimations {
 // IMAGE OPTIMIZATION SYSTEM
 class ImageOptimizer {
   constructor() {
-    this.breakpoints = [320, 640, 768, 1024, 1280, 1536];
     this.init();
   }
 
@@ -515,7 +483,6 @@ class ImageOptimizer {
   }
 
   setupObservers() {
-    // Intersection Observer for lazy loading
     this.intersectionObserver = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
@@ -533,148 +500,50 @@ class ImageOptimizer {
   }
 
   processExistingImages() {
-    // Process regular images with data-src
     const lazyImages = document.querySelectorAll("img[data-src]");
     lazyImages.forEach((img) => {
-      this.addBlurPlaceholder(img);
       this.intersectionObserver.observe(img);
     });
 
-    // Process post images specifically
     const postImages = document.querySelectorAll(".post-image");
     postImages.forEach((img) => {
       if (!img.hasAttribute("data-src") && img.src) {
-        // Convert existing post images to lazy loading
         img.setAttribute("data-src", img.src);
         img.removeAttribute("src");
-        this.addBlurPlaceholder(img);
         this.intersectionObserver.observe(img);
       }
     });
   }
 
-  addBlurPlaceholder(img) {
-    const parent = img.parentElement;
-    if (!parent || parent.classList.contains("image-container")) return;
-
-    const container = document.createElement("div");
-    container.className = "image-container";
-    container.style.position = "relative";
-    container.style.overflow = "hidden";
-    container.style.borderRadius = "var(--border-radius)";
-
-    // Create blur placeholder
-    const placeholder = document.createElement("div");
-    placeholder.className = "image-placeholder";
-    placeholder.style.width = "100%";
-    placeholder.style.height = "100%";
-    placeholder.style.background = "var(--border-color)";
-    placeholder.style.filter = "blur(10px)";
-    placeholder.style.transition = "opacity 0.5s ease";
-
-    // Wrap image
-    parent.insertBefore(container, img);
-    container.appendChild(placeholder);
-    container.appendChild(img);
-
-    // Style the actual image
-    img.style.opacity = "0";
-    img.style.transition = "opacity 0.5s ease";
-    img.style.width = "100%";
-    img.style.height = "auto";
-  }
-
   loadImage(img) {
-    const container = img.parentElement;
-    const placeholder = container?.querySelector(".image-placeholder");
-
     const src = img.getAttribute("data-src");
     if (!src) return;
 
-    // Check WebP support and use WebP if available
-    this.supportsWebP()
-      .then((supportsWebP) => {
-        const finalSrc = supportsWebP ? this.convertToWebP(src) : src;
-
-        const tempImg = new Image();
-        tempImg.onload = () => {
-          img.src = finalSrc;
-          img.style.opacity = "1";
-
-          if (placeholder) {
-            placeholder.style.opacity = "0";
-            setTimeout(() => {
-              placeholder.remove();
-            }, 500);
-          }
-        };
-
-        tempImg.onerror = () => {
-          // Fallback to original format if WebP fails
-          img.src = src;
-          img.style.opacity = "1";
-
-          if (placeholder) {
-            placeholder.style.opacity = "0";
-            setTimeout(() => {
-              placeholder.remove();
-            }, 500);
-          }
-        };
-
-        tempImg.src = finalSrc;
-      })
-      .catch(() => {
-        // If WebP check fails, use original source
-        img.src = src;
-        img.style.opacity = "1";
-
-        if (placeholder) {
-          placeholder.style.opacity = "0";
-          setTimeout(() => {
-            placeholder.remove();
-          }, 500);
-        }
-      });
-  }
-
-  convertToWebP(src) {
-    // Convert image path to WebP version
-    if (src.match(/\.(jpg|jpeg|png)$/i)) {
-      return src.replace(/\.(jpg|jpeg|png)$/i, ".webp");
-    }
-    return src;
-  }
-
-  supportsWebP() {
-    return new Promise((resolve) => {
-      const webP = new Image();
-      webP.onload = webP.onerror = () => {
-        resolve(webP.height === 2);
-      };
-      webP.src =
-        "data:image/webp;base64,UklGRjoAAABXRUJQVlA4IC4AAACyAgCdASoCAAIALmk0mk0iIiIiIgBoSygABc6WWgAA/veff/0PP8bA//LwYAAA";
-    });
-  }
-
-  // Utility method to optimize new images
-  optimizeImage(imgElement, src) {
-    imgElement.setAttribute("data-src", src);
-    this.addBlurPlaceholder(imgElement);
-    this.intersectionObserver.observe(imgElement);
+    const tempImg = new Image();
+    tempImg.onload = () => {
+      img.src = src;
+      img.style.opacity = "1";
+    };
+    tempImg.onerror = () => {
+      img.src = src;
+      img.style.opacity = "1";
+    };
+    tempImg.src = src;
   }
 }
 
-// Initialize everything when DOM is ready
+// Clean initialization without any spinner logic
 document.addEventListener("DOMContentLoaded", function () {
+  // Initialize all components
   new PageTransitions();
   new DarkModeManager();
   new MobileNavigation();
   new BlogSearch();
   new CommentsSection();
   new ScrollAnimations();
-  new ImageOptimizer(); // NEW: Initialize Image Optimizer
+  new ImageOptimizer();
 
+  // Main content animation
   const mainContent = document.querySelector(".main-content");
   if (mainContent) {
     mainContent.style.opacity = "0";
@@ -687,6 +556,7 @@ document.addEventListener("DOMContentLoaded", function () {
     }, 100);
   }
 
+  // Ripple effect for buttons
   document
     .querySelectorAll("button, .read-more, .view-all-btn")
     .forEach((button) => {
@@ -711,203 +581,16 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 });
 
-// Handle browser back/forward navigation
-window.addEventListener("pageshow", function (event) {
-  if (event.persisted) {
-    const loadingSpinner = document.getElementById("loading-spinner");
-    if (loadingSpinner) {
-      loadingSpinner.style.display = "none";
-    }
+// Remove any existing loading spinner from the DOM on page load
+document.addEventListener("DOMContentLoaded", function () {
+  const loadingSpinner = document.getElementById("loading-spinner");
+  if (loadingSpinner) {
+    loadingSpinner.remove();
   }
+  document.body.style.overflow = "";
 });
 
-// Error handling
+// Global error handling
 window.addEventListener("error", function (e) {
   console.error("Script error:", e.error);
 });
-
-// Add CSS for search results, ripple effect, AND image optimization
-const additionalStyles = `
-  .search-results {
-    display: none;
-    position: absolute;
-    top: 100%;
-    left: 0;
-    right: 0;
-    background: var(--secondary-bg);
-    border: 1px solid var(--border-color);
-    border-radius: var(--border-radius);
-    box-shadow: var(--shadow-hover);
-    max-height: 400px;
-    overflow-y: auto;
-    z-index: 1000;
-    margin-top: 0.5rem;
-  }
-  
-  body.dark-mode .search-results {
-    background: var(--dark-bg-secondary);
-    border: 1px solid var(--dark-border);
-  }
-  
-  .search-result-item {
-    border-bottom: 1px solid var(--border-color);
-  }
-  
-  body.dark-mode .search-result-item {
-    border-bottom: 1px solid var(--dark-border);
-  }
-  
-  .search-result-item:last-child {
-    border-bottom: none;
-  }
-  
-  .search-result-link {
-    display: block;
-    padding: 1rem;
-    color: var(--text-primary);
-    transition: background-color var(--transition);
-  }
-  
-  body.dark-mode .search-result-link {
-    color: var(--dark-text-primary);
-  }
-  
-  .search-result-link:hover {
-    background-color: var(--border-color);
-    color: var(--text-accent);
-  }
-  
-  body.dark-mode .search-result-link:hover {
-    background-color: var(--dark-border);
-  }
-  
-  .search-result-link h4 {
-    margin-bottom: 0.5rem;
-    font-size: 1.1rem;
-  }
-  
-  .search-result-link p {
-    color: var(--text-secondary);
-    font-size: 0.9rem;
-    margin-bottom: 0.5rem;
-  }
-  
-  body.dark-mode .search-result-link p {
-    color: var(--dark-text-secondary);
-  }
-  
-  .search-result-meta {
-    display: flex;
-    justify-content: space-between;
-    font-size: 0.8rem;
-    color: var(--text-light);
-  }
-  
-  .no-results {
-    padding: 1rem;
-    text-align: center;
-    color: var(--text-light);
-  }
-  
-  .ripple {
-    position: absolute;
-    border-radius: 50%;
-    background-color: rgba(255, 255, 255, 0.7);
-    transform: scale(0);
-    animation: ripple-animation 0.6s linear;
-    pointer-events: none;
-  }
-  
-  @keyframes ripple-animation {
-    to {
-      transform: scale(4);
-      opacity: 0;
-    }
-  }
-  
-  .message {
-    padding: 1rem;
-    margin: 1rem 0;
-    border-radius: var(--border-radius);
-    text-align: center;
-  }
-  
-  .message.success {
-    background-color: #d4edda;
-    color: #155724;
-    border: 1px solid #c3e6cb;
-  }
-  
-  body.dark-mode .message.success {
-    background-color: #0f5132;
-    color: #d1e7dd;
-    border: 1px solid #0c4128;
-  }
-
-  /* IMAGE OPTIMIZATION STYLES */
-  .image-container {
-    position: relative;
-    overflow: hidden;
-    border-radius: var(--border-radius);
-    background: var(--border-color);
-  }
-
-  .image-placeholder {
-    width: 100%;
-    height: 100%;
-    background: var(--border-color);
-    filter: blur(10px);
-    transition: opacity 0.5s ease;
-    transform: scale(1.1);
-  }
-
-  .image-container img {
-    transition: opacity 0.5s ease;
-    width: 100%;
-    height: auto;
-  }
-
-  .post-image {
-    width: 50%;
-    height: auto;
-    margin: 0 auto 1.5rem auto;
-    display: block;
-  }
-
-  @media (max-width: 768px) {
-    .post-image {
-      width: 70%;
-    }
-  }
-
-  @media (max-width: 480px) {
-    .post-image {
-      width: 85%;
-    }
-  }
-
-  @keyframes imageLoad {
-    0% { opacity: 0; transform: scale(1.02); }
-    100% { opacity: 1; transform: scale(1); }
-  }
-
-  .image-container.loaded img {
-    animation: imageLoad 0.6s ease-out;
-  }
-
-  @media (prefers-reduced-motion: reduce) {
-    .image-placeholder,
-    .image-container img {
-      transition: none;
-    }
-    
-    .image-container.loaded img {
-      animation: none;
-    }
-  }
-`;
-
-// Inject additional styles
-const styleSheet = document.createElement("style");
-styleSheet.textContent = additionalStyles;
-document.head.appendChild(styleSheet);
